@@ -34,7 +34,10 @@
           "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
         }
       },
-      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -49,7 +52,8 @@
           "locationAlwaysAndWhenInUsePermission": "Allow TripWise to use your location.",
           "locationWhenInUsePermission": "Allow TripWise to use your location."
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

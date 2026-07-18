@@ -8,6 +8,7 @@ import Animated, {
   Extrapolation,
   SharedValue,
 } from "react-native-reanimated"
+import { Image as ExpoImage } from "expo-image"
 import { LinearGradient } from "expo-linear-gradient"
 import { router } from "expo-router"
 import { useUiStore } from "../store/uiStore"
@@ -95,11 +96,14 @@ function Slide({
 
   return (
     <View style={styles.slide}>
-      <Animated.Image
-        source={{ uri: item.image }}
-        style={[styles.backgroundImage, imageStyle]}
-        resizeMode="cover"
-      />
+      <Animated.View style={[styles.backgroundImage, imageStyle]}>
+        <ExpoImage
+          source={{ uri: item.image }}
+          style={StyleSheet.absoluteFill}
+          contentFit="cover"
+          transition={200}
+        />
+      </Animated.View>
       <LinearGradient
         colors={["transparent", "rgba(0,0,0,0.6)", "rgba(0,0,0,0.9)"]}
         locations={[0, 0.4, 1]}
