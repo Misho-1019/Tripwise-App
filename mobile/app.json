@@ -14,7 +14,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.tripwise.app",
       "config": {
-        "googleMapsApiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        "googleMapsApiKey": "AIzaSyC_xkLdsjEE2kV-WJkvOBsntTruBWdqSgQ"
       },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "TripWise needs your location to show nearby destinations."
@@ -31,7 +31,7 @@
       "package": "com.tripwise.app",
       "config": {
         "googleMaps": {
-          "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+          "apiKey": "AIzaSyC_xkLdsjEE2kV-WJkvOBsntTruBWdqSgQ"
         }
       },
       "permissions": [
