@@ -25,11 +25,11 @@ const destinations = [
     rating: 4.8,
     categories: ["Culture", "Food", "History"],
     attractions: [
-      { name: "Eiffel Tower", description: "Iconic iron lattice tower offering panoramic views of Paris", price: 25, duration: "2 hours", rating: 4.8, category: "Landmark", lat: 48.8584, lng: 2.2945 },
-      { name: "Louvre Museum", description: "World's largest art museum housing the Mona Lisa", price: 17, duration: "4 hours", rating: 4.7, category: "Museum", lat: 48.8606, lng: 2.3376 },
-      { name: "Notre-Dame Cathedral", description: "Medieval Catholic cathedral with Gothic architecture", price: 0, duration: "1 hour", rating: 4.6, category: "Landmark", lat: 48.8530, lng: 2.3499 },
-      { name: "Montmartre", description: "Historic artistic neighborhood with Sacré-Cœur Basilica", price: 0, duration: "3 hours", rating: 4.5, category: "Neighborhood", lat: 48.8867, lng: 2.3431 },
-      { name: "Seine River Cruise", description: "Scenic boat ride along the Seine passing major landmarks", price: 15, duration: "1 hour", rating: 4.4, category: "Tour", lat: 48.8589, lng: 2.3468 },
+      { name: "Eiffel Tower", description: "Iconic iron lattice tower offering panoramic views of Paris", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLsGpnTn4CcXV8CuKHAqXTiCcvEQUTV2eWvSYPQUuDNXIucuUeadokH8URf1DEcxP4yuv6CKbMTCAPvvCCk3Yh2ZSxpaRrVmd-liiYkc5fkQ-WCFpUOA1JnXxnEdK6hrSg3juDlM2ROWMLBEJO2buv_MLNJ6PNuyyXOtjdnUdI1hcZcvYbGHsRNU1pZ3n5a3vk8jupVgbbX3hhHSkarhZqB_p-ot8KarCXiJU8YRuhF6x05SL3TUiv5RjA", price: 25, duration: "2 hours", rating: 4.8, category: "Landmark", lat: 48.8584, lng: 2.2945 },
+      { name: "Louvre Museum", description: "World's largest art museum housing the Mona Lisa", image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuArsqqM8dkEpO4SqKox5HflFYyTb3qxTcuXpjC7gEYELveY3fl4bTlvSN2AYl3cWs7GuvLbIaRIhmklfu9XG_WYzgqX7YcMLZihmEbErCd5pdl5B_FAk_R6Dzajd0YXw7N2WIJp0M3yM1-TYHKaIBU3C1OD5v39QWtEgTvBaNzWc6ezVG4BrUtIPG6ZvFnPHFvK_K5GLboO-PQlCX8PFQLikH7aXDQjT1ruzw0PgpwQhFwlR9O6sxvP5aOaT3J-fEAX88mIxZQB6hE", price: 17, duration: "4 hours", rating: 4.7, category: "Museum", lat: 48.8606, lng: 2.3376 },
+      { name: "Notre-Dame Cathedral", description: "Medieval Catholic cathedral with Gothic architecture", image_url: "https://images.unsplash.com/photo-1695746513501-80eb1b74d9d1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5vdHJlJTIwZGFtZSUyMGRlJTIwcGFyaXN8ZW58MHx8MHx8fDA%3D", price: 0, duration: "1 hour", rating: 4.6, category: "Landmark", lat: 48.8530, lng: 2.3499 },
+      { name: "Montmartre", description: "Historic artistic neighborhood with Sacré-Cœur Basilica", image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuAc_eNo44MzL0S3DJfU7eXrLCsEZ_bxa2rmOgYbtsT-TJKTk6tG4dxKZg7VKMZX8uRQK6-QGp8YZQyNb0D7RbyKaWlbuOEk6QRr-g1p4o4HtdL0cMcUVBFeZuXMO8SNUA5L1Sttwjfvm1jbmu9iJzbvhnzocPTc50F5RlzNSE9q6BWj7rJOSnh4NbRMU7tUXW9-upzBTdD228i0q9pN6D_VxtIwjav-gZ9mklC6iprF6CvapL2GIV_L7_uMESbYMhRgK_zte78NVCc", price: 0, duration: "3 hours", rating: 4.5, category: "Neighborhood", lat: 48.8867, lng: 2.3431 },
+      { name: "Seine River Cruise", description: "Scenic boat ride along the Seine passing major landmarks", image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuBII9kFaHveHT2mTU5Yzc71rj_zpgBueuta06VU8im-KEkMV2--gdYPUTn9g0928J7IgfIFBOnmbRuHg_CnifsVT_CEZ9TtWOgaQlZ-n_4tJ3xlLtIg39sk2kaxWrxsE9BanvXrmTw4A-fVI_G3NSInSalceKIjPyZSvsA8CHU79XAByK32a9vZERDlBIJKt98nunjKdgp2fZTxmDhl8d5xm2EYXtBuSwDUJ8blPJnFu7cTIaCA8Wsqrzd3P9VjqrGEoPEeFxqUIHI", price: 15, duration: "1 hour", rating: 4.4, category: "Tour", lat: 48.8589, lng: 2.3468 },
     ],
     hotels: [
       { name: "Hôtel Plaza Athénée", description: "Luxurious hotel near Eiffel Tower with Dior spa", price_per_night: 850, rating: 4.9, lat: 48.8700, lng: 2.3075, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
@@ -49,11 +49,11 @@ const destinations = [
     rating: 4.7,
     categories: ["Culture", "Food", "Shopping"],
     attractions: [
-      { name: "Senso-ji Temple", description: "Tokyo's oldest temple in Asakusa with vibrant market street", price: 0, duration: "1.5 hours", rating: 4.6, category: "Temple", lat: 35.7148, lng: 139.7967 },
-      { name: "Shibuya Crossing", description: "World-famous scramble crossing surrounded by neon", price: 0, duration: "30 min", rating: 4.4, category: "Landmark", lat: 35.6595, lng: 139.7004 },
-      { name: "Tsukiji Outer Market", description: "Famous seafood market with street food stalls", price: 20, duration: "2 hours", rating: 4.5, category: "Market", lat: 35.6654, lng: 139.7707 },
-      { name: "Meiji Shrine", description: "Serene Shinto shrine surrounded by forest", price: 0, duration: "1 hour", rating: 4.5, category: "Shrine", lat: 35.6764, lng: 139.6993 },
-      { name: "Akihabara Electric Town", description: "Electronics district and anime/manga hub", price: 0, duration: "3 hours", rating: 4.3, category: "Shopping", lat: 35.7023, lng: 139.7713 },
+      { name: "Senso-ji Temple", description: "Tokyo's oldest temple in Asakusa with vibrant market street", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLtOKdZNQ31H3FzI1SheHKJvxPNNg7XIa0BMMqSrSwyHyqYHSip2ALRRZuY04nUfs2DU2HWXUixD__3cbpCQZ5KWGUbULx1AnKlV6FiBLRJjC9aHEXleiL6y-O8G6RTYJIIqrhLvEjI3Op9kgFgSB22jV8HDeSQHmh4QvENKRqrSQitXrJWNJ54zjkC_XxVfTaAi4Ch903pReaedlwYq9JdKlxs9at7Vyx3iDCEiuzoaj_c5nKbrplBzxjw", price: 0, duration: "1.5 hours", rating: 4.6, category: "Temple", lat: 35.7148, lng: 139.7967 },
+      { name: "Shibuya Crossing", description: "World-famous scramble crossing surrounded by neon", image_url: "https://images.unsplash.com/photo-1729707397413-d4b10d6a0376?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fFNoaWJ1eWElMjBDcm9zc2luZyUyMHRva3lvfGVufDB8fDB8fHww", price: 0, duration: "30 min", rating: 4.4, category: "Landmark", lat: 35.6595, lng: 139.7004 },
+      { name: "Tsukiji Outer Market", description: "Famous seafood market with street food stalls", image_url: "https://images.unsplash.com/photo-1490974764272-9f2b89eb0a6c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VHN1a2lqaSUyME91dGVyJTIwTWFya2V0JTIwdG9reW98ZW58MHx8MHx8fDA%3D", price: 20, duration: "2 hours", rating: 4.5, category: "Market", lat: 35.6654, lng: 139.7707 },
+      { name: "Meiji Shrine", description: "Serene Shinto shrine surrounded by forest", image_url: "https://images.unsplash.com/photo-1578894218416-92cb9ae2d46e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TWVpamklMjBTaHJpbmUlMjB0b2t5b3xlbnwwfHwwfHx8MA%3D%3D", price: 0, duration: "1 hour", rating: 4.5, category: "Shrine", lat: 35.6764, lng: 139.6993 },
+      { name: "Akihabara Electric Town", description: "Electronics district and anime/manga hub", image_url: "https://images.unsplash.com/photo-1683995259187-54142c49338b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEFraWhhYmFyYSUyMEVsZWN0cmljJTIwVG93biUyMHRva3lvfGVufDB8fDB8fHww", price: 0, duration: "3 hours", rating: 4.3, category: "Shopping", lat: 35.7023, lng: 139.7713 },
     ],
     hotels: [
       { name: "Park Hyatt Tokyo", description: "Luxury hotel in Shinjuku with stunning city views", price_per_night: 500, rating: 4.8, lat: 35.6854, lng: 139.6917, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Bar"] },
@@ -73,11 +73,11 @@ const destinations = [
     rating: 4.6,
     categories: ["Beach", "Nature", "Adventure"],
     attractions: [
-      { name: "Ubud Monkey Forest", description: "Sacred monkey sanctuary in lush jungle", price: 5, duration: "1.5 hours", rating: 4.5, category: "Nature", lat: -8.5181, lng: 115.2591 },
-      { name: "Tegallalang Rice Terraces", description: "Stunning green rice terraces with swing photo ops", price: 3, duration: "1 hour", rating: 4.6, category: "Nature", lat: -8.4312, lng: 115.2798 },
-      { name: "Tanah Lot Temple", description: "Sea temple on rocky outcrop with sunset views", price: 5, duration: "1 hour", rating: 4.5, category: "Temple", lat: -8.6213, lng: 115.0868 },
-      { name: "Seminyak Beach", description: "Popular surf beach with sunset bars", price: 0, duration: "3 hours", rating: 4.3, category: "Beach", lat: -8.6914, lng: 115.1552 },
-      { name: "Ubud Art Market", description: "Traditional market with handmade crafts and art", price: 0, duration: "2 hours", rating: 4.2, category: "Market", lat: -8.5069, lng: 115.2625 },
+      { name: "Ubud Monkey Forest", description: "Sacred monkey sanctuary in lush jungle", image_url: "https://images.unsplash.com/photo-1709736874521-d95bdf765919?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VWJ1ZCUyME1vbmtleSUyMEZvcmVzdCUyMGJhbGl8ZW58MHx8MHx8fDA%3D", price: 5, duration: "1.5 hours", rating: 4.5, category: "Nature", lat: -8.5181, lng: 115.2591 },
+      { name: "Tegallalang Rice Terraces", description: "Stunning green rice terraces with swing photo ops", image_url: "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VGVnYWxsYWxhbmclMjBSaWNlJTIwVGVycmFjZXMlMjBiYWxpfGVufDB8fDB8fHww", price: 3, duration: "1 hour", rating: 4.6, category: "Nature", lat: -8.4312, lng: 115.2798 },
+      { name: "Tanah Lot Temple", description: "Sea temple on rocky outcrop with sunset views", image_url: "https://images.unsplash.com/photo-1565970141934-339d18ee310d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8VGFuYWglMjBMb3QlMjBUZW1wbGUlMjBiYWxpfGVufDB8fDB8fHww", price: 5, duration: "1 hour", rating: 4.5, category: "Temple", lat: -8.6213, lng: 115.0868 },
+      { name: "Seminyak Beach", description: "Popular surf beach with sunset bars", image_url: "https://images.unsplash.com/photo-1663551991664-9a4d701e968f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8U2VtaW55YWslMjBCZWFjaCUyMGJhbGl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "3 hours", rating: 4.3, category: "Beach", lat: -8.6914, lng: 115.1552 },
+      { name: "Ubud Art Market", description: "Traditional market with handmade crafts and art", image_url: "https://images.unsplash.com/photo-1769485016794-03c4834c02d9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VWJ1ZCUyMEFydCUyME1hcmtldCUyMGJhbGl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "2 hours", rating: 4.2, category: "Market", lat: -8.5069, lng: 115.2625 },
     ],
     hotels: [
       { name: "Four Seasons Resort Bali at Sayan", description: "Luxury resort surrounded by riverside jungle", price_per_night: 600, rating: 4.9, lat: -8.5000, lng: 115.2600, amenities: ["Pool", "Spa", "Restaurant", "Yoga", "Free WiFi"] },
@@ -97,11 +97,11 @@ const destinations = [
     rating: 4.7,
     categories: ["Shopping", "Culture", "Food"],
     attractions: [
-      { name: "Statue of Liberty", description: "Iconic symbol of freedom on Liberty Island", price: 24, duration: "3 hours", rating: 4.7, category: "Landmark", lat: 40.6892, lng: -74.0445 },
-      { name: "Central Park", description: "Massive urban park with lakes, trails, and attractions", price: 0, duration: "3 hours", rating: 4.6, category: "Park", lat: 40.7829, lng: -73.9654 },
-      { name: "Metropolitan Museum of Art", description: "World-renowned art museum on Museum Mile", price: 25, duration: "4 hours", rating: 4.7, category: "Museum", lat: 40.7794, lng: -73.9632 },
-      { name: "Times Square", description: "Bright lights, Broadway, and iconic billboards", price: 0, duration: "1 hour", rating: 4.3, category: "Landmark", lat: 40.7580, lng: -73.9855 },
-      { name: "Brooklyn Bridge", description: "Historic suspension bridge with pedestrian walkway", price: 0, duration: "1 hour", rating: 4.6, category: "Landmark", lat: 40.7061, lng: -73.9969 },
+      { name: "Statue of Liberty", description: "Iconic symbol of freedom on Liberty Island", image_url: "https://images.unsplash.com/photo-1585155967849-91c736589c84?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8U3RhdHVlJTIwb2YlMjBMaWJlcnR5JTIwbmV3JTIweW9ya3xlbnwwfHwwfHx8MA%3D%3D", price: 24, duration: "3 hours", rating: 4.7, category: "Landmark", lat: 40.6892, lng: -74.0445 },
+      { name: "Central Park", description: "Massive urban park with lakes, trails, and attractions", image_url: "https://images.unsplash.com/photo-1605540827677-693bad36b91f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Q2VudHJhbCUyMFBhcmslMjBuZXclMjB5b3JrfGVufDB8fDB8fHww", price: 0, duration: "3 hours", rating: 4.6, category: "Park", lat: 40.7829, lng: -73.9654 },
+      { name: "Metropolitan Museum of Art", description: "World-renowned art museum on Museum Mile", image_url: "https://images.unsplash.com/photo-1759020622419-a2b5bb9f53d2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TWV0cm9wb2xpdGFuJTIwTXVzZXVtJTIwb2YlMjBBcnQlMjBuZXclMjB5b3JrfGVufDB8fDB8fHww", price: 25, duration: "4 hours", rating: 4.7, category: "Museum", lat: 40.7794, lng: -73.9632 },
+      { name: "Times Square", description: "Bright lights, Broadway, and iconic billboards", image_url: "https://images.unsplash.com/photo-1552519837-47846308a0e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8VGltZXMlMjBTcXVhcmUlMjBuZXclMjB5b3JrfGVufDB8fDB8fHww", price: 0, duration: "1 hour", rating: 4.3, category: "Landmark", lat: 40.7580, lng: -73.9855 },
+      { name: "Brooklyn Bridge", description: "Historic suspension bridge with pedestrian walkway", image_url: "https://images.unsplash.com/photo-1477882244523-716124bf91a1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8QnJvb2tseW4lMjBCcmlkZ2UlMjBuZXclMjB5b3JrfGVufDB8fDB8fHww", price: 0, duration: "1 hour", rating: 4.6, category: "Landmark", lat: 40.7061, lng: -73.9969 },
     ],
     hotels: [
       { name: "The Plaza Hotel", description: "Legendary luxury hotel overlooking Central Park", price_per_night: 700, rating: 4.8, lat: 40.7644, lng: -73.9740, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Concierge"] },
@@ -121,11 +121,11 @@ const destinations = [
     rating: 4.5,
     categories: ["Shopping", "Adventure", "Food"],
     attractions: [
-      { name: "Burj Khalifa", description: "World's tallest building with observation deck", price: 40, duration: "2 hours", rating: 4.7, category: "Landmark", lat: 25.1972, lng: 55.2744 },
-      { name: "Dubai Mall", description: "Massive shopping mall with aquarium and ice rink", price: 0, duration: "4 hours", rating: 4.5, category: "Shopping", lat: 25.1986, lng: 55.2796 },
-      { name: "Palm Jumeirah", description: "Artificial island with luxury resorts and beaches", price: 0, duration: "2 hours", rating: 4.4, category: "Landmark", lat: 25.1124, lng: 55.1390 },
-      { name: "Desert Safari", description: "Dune bashing, camel rides, and BBQ dinner", price: 60, duration: "5 hours", rating: 4.6, category: "Adventure", lat: 25.1000, lng: 55.4000 },
-      { name: "Dubai Marina", description: "Waterfront district with restaurants and yacht cruises", price: 0, duration: "2 hours", rating: 4.4, category: "Neighborhood", lat: 25.0800, lng: 55.1400 },
+      { name: "Burj Khalifa", description: "World's tallest building with observation deck", image_url: "https://images.unsplash.com/photo-1582120031356-35f21bf61055?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8QnVyaiUyMEtoYWxpZmElMjBkdWJhaXxlbnwwfHwwfHx8MA%3D%3D", price: 40, duration: "2 hours", rating: 4.7, category: "Landmark", lat: 25.1972, lng: 55.2744 },
+      { name: "Dubai Mall", description: "Massive shopping mall with aquarium and ice rink", image_url: "https://images.unsplash.com/photo-1706760802876-3f447c70e8a1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8RHViYWklMjBNYWxsJTIwZHViYWl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "4 hours", rating: 4.5, category: "Shopping", lat: 25.1986, lng: 55.2796 },
+      { name: "Palm Jumeirah", description: "Artificial island with luxury resorts and beaches", image_url: "https://images.unsplash.com/photo-1682410601904-24ec1d9858e6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UGFsbSUyMEp1bWVpcmFoJTIwZHViYWl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "2 hours", rating: 4.4, category: "Landmark", lat: 25.1124, lng: 55.1390 },
+      { name: "Desert Safari", description: "Dune bashing, camel rides, and BBQ dinner", image_url: "https://images.unsplash.com/photo-1695878868496-fcbd6ef47f57?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fERlc2VydCUyMFNhZmFyaSUyMGR1YmFpfGVufDB8fDB8fHww", price: 60, duration: "5 hours", rating: 4.6, category: "Adventure", lat: 25.1000, lng: 55.4000 },
+      { name: "Dubai Marina", description: "Waterfront district with restaurants and yacht cruises", image_url: "https://images.unsplash.com/photo-1642137470505-c2f85c227ab8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fER1YmFpJTIwTWFyaW5hJTIwZHViYWl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "2 hours", rating: 4.4, category: "Neighborhood", lat: 25.0800, lng: 55.1400 },
     ],
     hotels: [
       { name: "Burj Al Arab Jumeirah", description: "Iconic sail-shaped luxury all-suite hotel", price_per_night: 1500, rating: 4.9, lat: 25.1412, lng: 55.1852, amenities: ["Private Beach", "Pool", "Spa", "Restaurant", "Helipad"] },
@@ -145,11 +145,11 @@ const destinations = [
     rating: 4.6,
     categories: ["Beach", "Culture", "Food"],
     attractions: [
-      { name: "Sagrada Família", description: "Gaudí's unfinished masterpiece basilica", price: 26, duration: "2 hours", rating: 4.7, category: "Landmark", lat: 41.4036, lng: 2.1744 },
-      { name: "Park Güell", description: "Colorful Gaudí park with mosaic art and city views", price: 10, duration: "1.5 hours", rating: 4.5, category: "Park", lat: 41.4145, lng: 2.1527 },
-      { name: "La Boqueria Market", description: "Iconic food market on Las Ramblas", price: 15, duration: "1.5 hours", rating: 4.5, category: "Market", lat: 41.3815, lng: 2.1717 },
-      { name: "Barceloneta Beach", description: "Popular city beach with restaurants and bars", price: 0, duration: "3 hours", rating: 4.3, category: "Beach", lat: 41.3784, lng: 2.1925 },
-      { name: "Gothic Quarter", description: "Medieval streets with hidden plazas and history", price: 0, duration: "2 hours", rating: 4.6, category: "Neighborhood", lat: 41.3839, lng: 2.1765 },
+      { name: "Sagrada Família", description: "Gaudí's unfinished masterpiece basilica", image_url: "https://images.unsplash.com/photo-1650964827770-421afa7960ac?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8U2FncmFkYSUyMEZhbSVDMyVBRGxpYSUyMGJhcmNlbG9uYXxlbnwwfHwwfHx8MA%3D%3D", price: 26, duration: "2 hours", rating: 4.7, category: "Landmark", lat: 41.4036, lng: 2.1744 },
+      { name: "Park Güell", description: "Colorful Gaudí park with mosaic art and city views", image_url: "https://images.unsplash.com/photo-1644144974835-61c2c13c79c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UGFyayUyMEclQzMlQkNlbGwlMjBiYXJjZWxvbmF8ZW58MHx8MHx8fDA%3D", price: 10, duration: "1.5 hours", rating: 4.5, category: "Park", lat: 41.4145, lng: 2.1527 },
+      { name: "La Boqueria Market", description: "Iconic food market on Las Ramblas", image_url: "https://images.unsplash.com/photo-1614635454419-36aa631da264?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TGElMjBCb3F1ZXJpYSUyME1hcmtldCUyMGJhcmNlbG9uYXxlbnwwfHwwfHx8MA%3D%3D", price: 15, duration: "1.5 hours", rating: 4.5, category: "Market", lat: 41.3815, lng: 2.1717 },
+      { name: "Barceloneta Beach", description: "Popular city beach with restaurants and bars", image_url: "https://images.unsplash.com/photo-1628541289614-b70c327da0bf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8QmFyY2Vsb25ldGElMjBCZWFjaCUyMGJhcmNlbG9uYXxlbnwwfHwwfHx8MA%3D%3D", price: 0, duration: "3 hours", rating: 4.3, category: "Beach", lat: 41.3784, lng: 2.1925 },
+      { name: "Casa Batlló", description: "Gaudí's whimsical modernist masterpiece with mosaic facade", image_url: "https://images.unsplash.com/photo-1641331766603-ef0f5f4d81e2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2F1ZGklMjBob3VzZSUyMGJhcmNlbG9uYXxlbnwwfHwwfHx8MA%3D%3D", price: 0, duration: "2 hours", rating: 4.6, category: "Neighborhood", lat: 41.3916, lng: 2.1650 },
     ],
     hotels: [
       { name: "Hotel Arts Barcelona", description: "Luxury beachfront hotel with infinity pool", price_per_night: 450, rating: 4.7, lat: 41.3863, lng: 2.1968, amenities: ["Pool", "Spa", "Restaurant", "Beach Access", "Gym"] },
@@ -169,11 +169,11 @@ const destinations = [
     rating: 4.5,
     categories: ["Food", "Culture", "Shopping"],
     attractions: [
-      { name: "Grand Palace", description: "Former royal residence with Wat Phra Kaew temple", price: 15, duration: "2 hours", rating: 4.6, category: "Landmark", lat: 13.7500, lng: 100.4914 },
-      { name: "Wat Arun", description: "Stunning riverside temple with towering spires", price: 3, duration: "1 hour", rating: 4.5, category: "Temple", lat: 13.7437, lng: 100.4888 },
-      { name: "Chatuchak Weekend Market", description: "One of the world's largest weekend markets", price: 0, duration: "4 hours", rating: 4.4, category: "Market", lat: 13.7997, lng: 100.5508 },
-      { name: "Khao San Road", description: "Famous backpacker street with bars and street food", price: 0, duration: "2 hours", rating: 4.0, category: "Nightlife", lat: 13.7588, lng: 100.4977 },
-      { name: "Floating Market", description: "Traditional market on canals with boat vendors", price: 10, duration: "3 hours", rating: 4.3, category: "Market", lat: 13.7500, lng: 100.4800 },
+      { name: "Grand Palace", description: "Former royal residence with Wat Phra Kaew temple", image_url: "https://plus.unsplash.com/premium_photo-1661882477461-20d16af70819?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8R3JhbmQlMjBQYWxhY2UlMjBiYW5na29rfGVufDB8fDB8fHww", price: 15, duration: "2 hours", rating: 4.6, category: "Landmark", lat: 13.7500, lng: 100.4914 },
+      { name: "Wat Arun", description: "Stunning riverside temple with towering spires", image_url: "https://images.unsplash.com/photo-1714672709462-de21a12a1339?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFdhdCUyMEFydW4lMjBiYW5na29rfGVufDB8fDB8fHww", price: 3, duration: "1 hour", rating: 4.5, category: "Temple", lat: 13.7437, lng: 100.4888 },
+      { name: "Chatuchak Weekend Market", description: "One of the world's largest weekend markets", image_url: "https://images.unsplash.com/photo-1696437492959-b9a8c37df4ad?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q2hhdHVjaGFrJTIwV2Vla2VuZCUyME1hcmtldCUyMGJhbmdrb2t8ZW58MHx8MHx8fDA%3D", price: 0, duration: "4 hours", rating: 4.4, category: "Market", lat: 13.7997, lng: 100.5508 },
+      { name: "Khao San Road", description: "Famous backpacker street with bars and street food", image_url: "https://images.unsplash.com/photo-1510380097750-835f6f8e11ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8S2hhbyUyMFNhbiUyMFJvYWQlMjBiYW5na29rfGVufDB8fDB8fHww", price: 0, duration: "2 hours", rating: 4.0, category: "Nightlife", lat: 13.7588, lng: 100.4977 },
+      { name: "Floating Market", description: "Traditional market on canals with boat vendors", image_url: "https://images.unsplash.com/photo-1588732807335-2132a3f9489e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RmxvYXRpbmclMjBNYXJrZXQlMjBiYW5na29rfGVufDB8fDB8fHww", price: 10, duration: "3 hours", rating: 4.3, category: "Market", lat: 13.7500, lng: 100.4800 },
     ],
     hotels: [
       { name: "Mandarin Oriental Bangkok", description: "Iconic luxury hotel on the Chao Phraya River", price_per_night: 350, rating: 4.8, lat: 13.7236, lng: 100.5144, amenities: ["Pool", "Spa", "Restaurant", "River View", "Gym"] },
@@ -193,11 +193,11 @@ const destinations = [
     rating: 4.6,
     categories: ["Beach", "Nature", "Adventure"],
     attractions: [
-      { name: "Sydney Opera House", description: "World-famous performing arts venue on the harbor", price: 25, duration: "1.5 hours", rating: 4.7, category: "Landmark", lat: -33.8568, lng: 151.2153 },
-      { name: "Bondi Beach", description: "Iconic surf beach with coastal walk to Coogee", price: 0, duration: "4 hours", rating: 4.6, category: "Beach", lat: -33.8915, lng: 151.2767 },
-      { name: "Sydney Harbour Bridge", description: "Climb the famous bridge for panoramic views", price: 200, duration: "3 hours", rating: 4.8, category: "Adventure", lat: -33.8523, lng: 151.2108 },
-      { name: "Royal Botanic Garden", description: "Harbour-side gardens with native plants", price: 0, duration: "1.5 hours", rating: 4.5, category: "Park", lat: -33.8642, lng: 151.2166 },
-      { name: "Taronga Zoo", description: "Zoo with native Australian animals and harbor views", price: 35, duration: "4 hours", rating: 4.5, category: "Nature", lat: -33.8434, lng: 151.2414 },
+      { name: "Sydney Opera House", description: "World-famous performing arts venue on the harbor", image_url: "https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8U3lkbmV5JTIwT3BlcmElMjBIb3VzZSUyMHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D", price: 25, duration: "1.5 hours", rating: 4.7, category: "Landmark", lat: -33.8568, lng: 151.2153 },
+      { name: "Bondi Beach", description: "Iconic surf beach with coastal walk to Coogee", image_url: "https://images.unsplash.com/photo-1551955682-78a3c53ab544?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Qm9uZGklMjBCZWFjaCUyMHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D", price: 0, duration: "4 hours", rating: 4.6, category: "Beach", lat: -33.8915, lng: 151.2767 },
+      { name: "Sydney Harbour Bridge", description: "Climb the famous bridge for panoramic views", image_url: "https://images.unsplash.com/photo-1524562865630-b991c6c2f261?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8U3lkbmV5JTIwSGFyYm91ciUyMEJyaWRnZSUyMHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D", price: 200, duration: "3 hours", rating: 4.8, category: "Adventure", lat: -33.8523, lng: 151.2108 },
+      { name: "Royal Botanic Garden", description: "Harbour-side gardens with native plants", image_url: "https://images.unsplash.com/photo-1601537696748-7540c6e568fe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Um95YWwlMjBCb3RhbmljJTIwR2FyZGVuJTIwc3lkbmV5fGVufDB8fDB8fHww", price: 0, duration: "1.5 hours", rating: 4.5, category: "Park", lat: -33.8642, lng: 151.2166 },
+      { name: "Taronga Zoo", description: "Zoo with native Australian animals and harbor views", image_url: "https://images.unsplash.com/photo-1667083213657-f8f6d461f0ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VGFyb25nYSUyMFpvbyUyMHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D", price: 35, duration: "4 hours", rating: 4.5, category: "Nature", lat: -33.8434, lng: 151.2414 },
     ],
     hotels: [
       { name: "Shangri-La Sydney", description: "Luxury hotel with Opera House harbor views", price_per_night: 380, rating: 4.7, lat: -33.8610, lng: 151.2100, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Bar"] },
@@ -217,11 +217,11 @@ const destinations = [
     rating: 4.7,
     categories: ["History", "Culture", "Food"],
     attractions: [
-      { name: "Colosseum", description: "Ancient Roman amphitheater, iconic symbol of Rome", price: 16, duration: "2 hours", rating: 4.7, category: "Landmark", lat: 41.8902, lng: 12.4922 },
-      { name: "Vatican Museums", description: "Vast papal art collection including Sistine Chapel", price: 17, duration: "4 hours", rating: 4.6, category: "Museum", lat: 41.9065, lng: 12.4536 },
-      { name: "Trevi Fountain", description: "Baroque fountain where you toss a coin for luck", price: 0, duration: "30 min", rating: 4.6, category: "Landmark", lat: 41.9009, lng: 12.4833 },
-      { name: "Roman Forum", description: "Ancient Roman government center ruins", price: 16, duration: "2 hours", rating: 4.5, category: "History", lat: 41.8925, lng: 12.4853 },
-      { name: "Trastevere", description: "Charming neighborhood with authentic Roman cuisine", price: 0, duration: "3 hours", rating: 4.6, category: "Neighborhood", lat: 41.8867, lng: 12.4699 },
+      { name: "Colosseum", description: "Ancient Roman amphitheater, iconic symbol of Rome", image_url: "https://images.unsplash.com/photo-1555992828-ca4dbe41d294?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q29sb3NzZXVtJTIwcm9tZXxlbnwwfHwwfHx8MA%3D%3D", price: 16, duration: "2 hours", rating: 4.7, category: "Landmark", lat: 41.8902, lng: 12.4922 },
+      { name: "Vatican Museums", description: "Vast papal art collection including Sistine Chapel", image_url: "https://images.unsplash.com/photo-1526385915680-5f21e15e9fd0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8VmF0aWNhbiUyME11c2V1bXMlMjByb21lfGVufDB8fDB8fHww", price: 17, duration: "4 hours", rating: 4.6, category: "Museum", lat: 41.9065, lng: 12.4536 },
+      { name: "Trevi Fountain", description: "Baroque fountain where you toss a coin for luck", image_url: "https://images.unsplash.com/photo-1583422095309-55daabc9cc78?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8VHJldmklMjBGb3VudGFpbiUyMHJvbWV8ZW58MHx8MHx8fDA%3D", price: 0, duration: "30 min", rating: 4.6, category: "Landmark", lat: 41.9009, lng: 12.4833 },
+      { name: "Roman Forum", description: "Ancient Roman government center ruins", image_url: "https://images.unsplash.com/photo-1612021148925-466704654aeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Um9tYW4lMjBGb3J1bSUyMHJvbWV8ZW58MHx8MHx8fDA%3D", price: 16, duration: "2 hours", rating: 4.5, category: "History", lat: 41.8925, lng: 12.4853 },
+      { name: "Trastevere", description: "Charming neighborhood with authentic Roman cuisine", image_url: "https://images.unsplash.com/photo-1696407868324-460a69a81c11?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODJ8fFRyYXN0ZXZlcmUlMjByb21lfGVufDB8fDB8fHww", price: 0, duration: "3 hours", rating: 4.6, category: "Neighborhood", lat: 41.8867, lng: 12.4699 },
     ],
     hotels: [
       { name: "Hotel Eden Rome", description: "Luxury hotel near Spanish Steps with rooftop restaurant", price_per_night: 600, rating: 4.8, lat: 41.9050, lng: 12.4850, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
@@ -241,11 +241,11 @@ const destinations = [
     rating: 4.5,
     categories: ["Nature", "Adventure", "Beach"],
     attractions: [
-      { name: "Table Mountain", description: "Iconic flat-topped mountain with cable car to summit", price: 20, duration: "3 hours", rating: 4.7, category: "Nature", lat: -33.9628, lng: 18.4098 },
-      { name: "Boulders Beach", description: "Penguin colony beach with boardwalks", price: 10, duration: "1.5 hours", rating: 4.5, category: "Beach", lat: -34.1974, lng: 18.4512 },
-      { name: "V&A Waterfront", description: "Harborfront with shops, restaurants, and attractions", price: 0, duration: "3 hours", rating: 4.4, category: "Shopping", lat: -33.9036, lng: 18.4220 },
-      { name: "Cape of Good Hope", description: "Scenic nature reserve at the tip of the Cape Peninsula", price: 12, duration: "4 hours", rating: 4.6, category: "Nature", lat: -34.3568, lng: 18.4740 },
-      { name: "Robben Island", description: "Historical prison where Mandela was held", price: 30, duration: "4 hours", rating: 4.5, category: "History", lat: -33.8076, lng: 18.3711 },
+      { name: "Table Mountain", description: "Iconic flat-topped mountain with cable car to summit", image_url: "https://plus.unsplash.com/premium_photo-1697730061063-ad499e343f26?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGFibGUlMjBtb3VudGFpbiUyMGNhcGUlMjB0b3dufGVufDB8fDB8fHww", price: 20, duration: "3 hours", rating: 4.7, category: "Nature", lat: -33.9628, lng: 18.4098 },
+      { name: "Boulders Beach", description: "Penguin colony beach with boardwalks", image_url: "https://images.unsplash.com/photo-1580072848715-e85edcad9dce?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEJvdWxkZXJzJTIwQmVhY2glMjBjYXBlJTIwdG93bnxlbnwwfHwwfHx8MA%3D%3D", price: 10, duration: "1.5 hours", rating: 4.5, category: "Beach", lat: -34.1974, lng: 18.4512 },
+      { name: "V&A Waterfront", description: "Harborfront with shops, restaurants, and attractions", image_url: "https://images.unsplash.com/photo-1529528070131-eda9f3e90919?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ViUyNkElMjBXYXRlcmZyb250JTIwY2FwZSUyMHRvd258ZW58MHx8MHx8fDA%3D", price: 0, duration: "3 hours", rating: 4.4, category: "Shopping", lat: -33.9036, lng: 18.4220 },
+      { name: "Cape of Good Hope", description: "Scenic nature reserve at the tip of the Cape Peninsula", image_url: "https://images.unsplash.com/photo-1663582068240-1ffb66021ac7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2FwZSUyMG9mJTIwR29vZCUyMEhvcGUlMjBjYXBlJTIwdG93bnxlbnwwfHwwfHx8MA%3D%3D", price: 12, duration: "4 hours", rating: 4.6, category: "Nature", lat: -34.3568, lng: 18.4740 },
+      { name: "Robben Island", description: "Historical prison where Mandela was held", image_url: "https://images.unsplash.com/photo-1640584139666-c2631301c638?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFJvYmJlbiUyMElzbGFuZCUyMGNhcGUlMjB0b3dufGVufDB8fDB8fHww", price: 30, duration: "4 hours", rating: 4.5, category: "History", lat: -33.8076, lng: 18.3711 },
     ],
     hotels: [
       { name: "The Silo Hotel", description: "Industrial-chic luxury hotel at the V&A Waterfront", price_per_night: 800, rating: 4.9, lat: -33.9040, lng: 18.4200, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
@@ -259,6 +259,13 @@ async function seed() {
 
   try {
     await client.query("BEGIN")
+
+    // Clear existing seed data before inserting fresh
+    await client.query("DELETE FROM destination_categories")
+    await client.query("DELETE FROM attractions")
+    await client.query("DELETE FROM hotels")
+    await client.query("DELETE FROM categories")
+    await client.query("DELETE FROM destinations")
 
     // Insert categories
     const categoryMap = new Map<string, string>()
@@ -293,9 +300,9 @@ async function seed() {
       // Insert attractions
       for (const attr of dest.attractions) {
         await client.query(
-          `INSERT INTO attractions (destination_id, name, description, lat, lng, price, duration, rating, category)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-          [destId, attr.name, attr.description, attr.lat, attr.lng, attr.price, attr.duration, attr.rating, attr.category]
+          `INSERT INTO attractions (destination_id, name, description, image_url, lat, lng, price, duration, rating, category)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+          [destId, attr.name, attr.description, attr.image_url, attr.lat, attr.lng, attr.price, attr.duration, attr.rating, attr.category]
         )
       }
 
