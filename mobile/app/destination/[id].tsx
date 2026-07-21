@@ -62,6 +62,10 @@ export default function DestinationDetailScreen() {
   const savedIds = new Set(savedData?.destinations?.map((d) => d.id) || [])
   const isSaved = id ? savedIds.has(id) : false
 
+  const handlePlanTrip = useCallback(() => {
+    router.push(`/trip/new?destinationId=${id}&name=${encodeURIComponent(destination?.name || "")}&imageUrl=${encodeURIComponent(destination?.image_url || "")}`)
+  }, [id, destination])
+
   const handleToggleSave = useCallback(() => {
     if (!id) return
     if (isSaved) {
@@ -181,6 +185,9 @@ export default function DestinationDetailScreen() {
           {destination.description && (
             <Text style={styles.description}>{destination.description}</Text>
           )}
+          <TouchableOpacity style={styles.planButton} onPress={handlePlanTrip} activeOpacity={0.8}>
+            <Text style={styles.planButtonText}>✈ Plan a Trip</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Tabs */}
@@ -409,6 +416,23 @@ const styles = StyleSheet.create({
   ratingValue: { fontFamily: tokens.fontBodyBold, fontSize: 16, color: tokens.text },
   reviewCount: { fontFamily: tokens.fontBody, fontSize: 12, color: tokens.textSecondary, marginTop: 2 },
   description: { fontFamily: tokens.fontBody, fontSize: 14, color: tokens.textSecondary, lineHeight: 20, marginTop: 16 },
+  planButton: {
+    marginTop: 20,
+    backgroundColor: tokens.primary,
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    shadowColor: tokens.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  planButtonText: {
+    fontFamily: tokens.fontBodyBold,
+    fontSize: 16,
+    color: "#fff",
+  },
   tabsRow: {
     flexDirection: "row",
     paddingHorizontal: 16,
