@@ -24,6 +24,7 @@ export default function RootLayout() {
         <Stack.Screen name="trip/[id]" />
         <Stack.Screen name="trip/new" />
         <Stack.Screen name="ai-planner" />
+        <Stack.Screen name="trips" />
       </Stack>
     </QueryClientProvider>
   )

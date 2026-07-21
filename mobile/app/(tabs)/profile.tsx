@@ -122,7 +122,7 @@ export default function ProfileScreen() {
         <View style={styles.tripsSection}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Your Trips</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("/trips" as any)}>
               <Text style={styles.viewAll}>View All</Text>
             </TouchableOpacity>
           </View>
