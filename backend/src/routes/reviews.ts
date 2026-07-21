@@ -7,7 +7,7 @@ const router = Router()
 
 const createReviewSchema = z.object({
   rating: z.number().int().min(1).max(5),
-  comment: z.string().min(1).max(1000),
+  comment: z.string().max(1000).optional(),
 })
 
 router.post("/:destinationId", authenticate, async (req: AuthRequest, res: Response) => {
@@ -24,7 +24,14 @@ router.post("/:destinationId", authenticate, async (req: AuthRequest, res: Respo
 
     const result = await pool.query(
       "INSERT INTO reviews (user_id, destination_id, rating, comment) VALUES ($1, $2, $3, $4) RETURNING *",
-      [req.userId, req.params.destinationId, rating, comment]
+      [req.userId, req.params.destinationId, rating, comment || null]
+    )
+
+    await pool.query(
+      `UPDATE destinations SET rating = (
+        SELECT ROUND(AVG(rating)::numeric, 1) FROM reviews WHERE destination_id = $1
+      ) WHERE id = $1`,
+      [req.params.destinationId]
     )
 
     res.status(201).json({ review: result.rows[0] })

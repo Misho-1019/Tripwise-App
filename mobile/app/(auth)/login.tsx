@@ -13,6 +13,7 @@ import {
 } from "react-native"
 import { router } from "expo-router"
 import { LinearGradient } from "expo-linear-gradient"
+import { Image as ExpoImage } from "expo-image"
 import { useLogin, useGoogleAuth } from "../../hooks/useAuth"
 import { QuoteCard } from "../../components/ui/QuoteCard"
 
@@ -93,11 +94,12 @@ export default function LoginScreen() {
       >
         {/* Hero */}
         <View style={styles.hero}>
-          <Image
+          <ExpoImage
             source={{
               uri: "https://lh3.googleusercontent.com/aida/AP1WRLs02kjS35AHFvpyP9HmpJsvdPxqGj1gUXKtaqEmKMYDbYDoCD4Km7WA9gs1qlZth3XabUWRZtKGI407QAQhOqJIwjyPPfaq_DB5D2NKzQTpbVAQXjLkf7rPaR1bZsAyxCnI4UeAL-xHnOsNVEP184O_ZgEo-dynBow5_PkhluIdxmSgnyIvJ5gYQ9mdU3JbHC2b440_UeYEfP65tcdAoYo3TAlKH455TiylCSdpfdwgJ2Agv2fse5TUyHQ",
             }}
             style={styles.heroImage}
+            contentFit="cover"
           />
           <LinearGradient
             colors={["transparent", "rgba(0,0,0,0.4)", tokens.background]}

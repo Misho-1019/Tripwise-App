@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef, useMemo } from "react"
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, ActivityIndicator, Dimensions, Linking } from "react-native"
+import { View, Text, TextInput, Modal, KeyboardAvoidingView, Platform, StyleSheet, ScrollView, Image, TouchableOpacity, ActivityIndicator, Dimensions, Linking, Alert, Keyboard, TouchableWithoutFeedback } from "react-native"
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
@@ -11,7 +11,8 @@ import Animated, {
 import { LinearGradient } from "expo-linear-gradient"
 import { useLocalSearchParams, router } from "expo-router"
 import { useDestination, useAttractions, useHotels } from "../../hooks/useDestinations"
-import { useReviews } from "../../hooks/useReviews"
+import { useReviews, useCreateReview } from "../../hooks/useReviews"
+import { useSavedDestinations, useSaveDestination, useUnsaveDestination } from "../../hooks/useSaved"
 import { AttractionCard } from "../../components/destination/AttractionCard"
 import { HotelCard } from "../../components/destination/HotelCard"
 import { ReviewCard } from "../../components/destination/ReviewCard"
@@ -49,6 +50,34 @@ export default function DestinationDetailScreen() {
   const reviews = reviewData?.reviews || []
 
   const reviewAvg = reviewData?.averageRating
+
+  const [showReviewModal, setShowReviewModal] = useState(false)
+  const [reviewRating, setReviewRating] = useState(0)
+  const [reviewComment, setReviewComment] = useState("")
+  const createReview = useCreateReview()
+  const { data: savedData } = useSavedDestinations()
+  const saveMutation = useSaveDestination()
+  const unsaveMutation = useUnsaveDestination()
+
+  const savedIds = new Set(savedData?.destinations?.map((d) => d.id) || [])
+  const isSaved = id ? savedIds.has(id) : false
+
+  const handleToggleSave = useCallback(() => {
+    if (!id) return
+    if (isSaved) {
+      unsaveMutation.mutate(id)
+    } else {
+      saveMutation.mutate(id)
+    }
+  }, [id, isSaved, saveMutation, unsaveMutation])
+
+  const handleSubmitReview = () => {
+    if (reviewRating === 0) return
+    createReview.mutate(
+      { destinationId: id || "", data: { rating: reviewRating, comment: reviewComment } },
+      { onSuccess: () => { setShowReviewModal(false); setReviewRating(0); setReviewComment("") } },
+    )
+  }
 
   const heroImages = useMemo(() => {
     const images = [destination?.image_url]
@@ -95,9 +124,7 @@ export default function DestinationDetailScreen() {
             <Text style={styles.headerIcon}>✈</Text>
             <Text style={styles.headerTitle}>TripWise</Text>
           </View>
-          <TouchableOpacity style={styles.headerButton}>
-            <Text style={styles.headerButtonText}>↗</Text>
-          </TouchableOpacity>
+          <View style={{ width: 40 }} />
         </View>
 
         {/* Hero */}
@@ -128,8 +155,8 @@ export default function DestinationDetailScreen() {
             locations={[0.4, 1]}
             style={styles.heroOverlay}
           />
-          <TouchableOpacity style={styles.heartButton}>
-            <Text style={styles.heartIcon}>♡</Text>
+          <TouchableOpacity style={styles.heartButton} onPress={handleToggleSave} hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}>
+            <Text style={styles.heartIcon}>{isSaved ? "♥" : "♡"}</Text>
           </TouchableOpacity>
         </View>
 
@@ -231,12 +258,64 @@ export default function DestinationDetailScreen() {
                 ))}
               </View>
             )}
-            <TouchableOpacity style={styles.writeReviewButton}>
+            <TouchableOpacity style={styles.writeReviewButton} onPress={() => setShowReviewModal(true)}>
               <Text style={styles.writeReviewText}>✏ Write a Review</Text>
             </TouchableOpacity>
           </View>
         )}
       </ScrollView>
+
+      <Modal visible={showReviewModal} transparent animationType="slide" onRequestClose={() => setShowReviewModal(false)}>
+        <KeyboardAvoidingView style={styles.modalOverlay} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Write a Review</Text>
+              <TouchableOpacity onPress={() => setShowReviewModal(false)}>
+                <Text style={styles.modalClose}>✕</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.ratingLabel}>Tap to rate</Text>
+            <View style={styles.starRow}>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <TouchableOpacity key={star} onPress={() => setReviewRating(star)}>
+                  <Text style={[styles.star, star <= reviewRating && styles.starActive]}>★</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <TextInput
+              style={styles.commentInput}
+              placeholder="Share your experience (optional)"
+              placeholderTextColor="#999"
+              value={reviewComment}
+              onChangeText={setReviewComment}
+              multiline
+              textAlignVertical="top"
+            />
+
+            {createReview.error && (
+              <Text style={styles.modalError}>
+                {createReview.error instanceof Error ? createReview.error.message : "Failed to submit"}
+              </Text>
+            )}
+
+            <TouchableOpacity
+              style={[styles.submitButton, reviewRating === 0 && styles.submitDisabled]}
+              onPress={handleSubmitReview}
+              disabled={reviewRating === 0 || createReview.isPending}
+            >
+              {createReview.isPending ? (
+                <ActivityIndicator color="#fff" size="small" />
+              ) : (
+                <Text style={styles.submitText}>Submit Review</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </Modal>
     </View>
   )
 }
@@ -362,4 +441,18 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   writeReviewText: { fontFamily: tokens.fontBodyBold, fontSize: 14, color: tokens.primary },
+  modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "flex-end" },
+  modalContent: { backgroundColor: tokens.surface, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 40 },
+  modalHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 24 },
+  modalTitle: { fontFamily: tokens.fontHeadline, fontSize: 20, fontWeight: "700", color: tokens.text },
+  modalClose: { fontSize: 20, color: tokens.textSecondary },
+  ratingLabel: { fontFamily: tokens.fontBodyBold, fontSize: 14, color: tokens.textSecondary, marginBottom: 12 },
+  starRow: { flexDirection: "row", gap: 8, marginBottom: 24 },
+  star: { fontSize: 36, color: "#D1D5DB" },
+  starActive: { color: "#F59E0B" },
+  commentInput: { backgroundColor: tokens.background, borderRadius: 12, padding: 16, minHeight: 100, fontFamily: tokens.fontBody, fontSize: 16, color: tokens.text, marginBottom: 16 },
+  modalError: { fontFamily: tokens.fontBodyMedium, fontSize: 14, color: "#FF3B30", marginBottom: 12, textAlign: "center" },
+  submitButton: { backgroundColor: tokens.primary, paddingVertical: 16, borderRadius: 12, alignItems: "center" },
+  submitDisabled: { opacity: 0.5 },
+  submitText: { fontFamily: tokens.fontBodyBold, fontSize: 16, color: "#fff" },
 })

@@ -13,6 +13,7 @@ import {
 } from "react-native"
 import { router } from "expo-router"
 import { LinearGradient } from "expo-linear-gradient"
+import { Image as ExpoImage } from "expo-image"
 import { useRegister } from "../../hooks/useAuth"
 import { QuoteCard } from "../../components/ui/QuoteCard"
 
@@ -93,11 +94,12 @@ export default function SignupScreen() {
       >
         {/* Hero */}
         <View style={styles.hero}>
-          <Image
+          <ExpoImage
             source={{
               uri: "https://lh3.googleusercontent.com/aida/AP1WRLs6mYQ-MJJ9cJfnAqqTg2hhSCeE8Ar23deCDdhLPEkDgSzfwYCyGvjnnR9BFqssiFS1lAqo6au8gxsNQ5_5c1oCW4Q8sKFj8CytP6_uHfMuJ6ob5tGE7kuy7S7af8jxMj_34Z8h8q2PDpJyFKokuW6JJ4n3dui6GFDT5pVEClddnunbPLB120oVOes1bGsCxz4r7KiGkiHjcAsRbM2DFUtuA-Q3DQF724msOD5zYKOi8HBHKnUngGQGmg",
             }}
             style={styles.heroImage}
+            contentFit="cover"
           />
           <LinearGradient
             colors={["transparent", "rgba(0,0,0,0.4)", tokens.background]}

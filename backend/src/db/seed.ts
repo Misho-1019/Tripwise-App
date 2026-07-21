@@ -32,8 +32,8 @@ const destinations = [
       { name: "Seine River Cruise", description: "Scenic boat ride along the Seine passing major landmarks", image_url: "https://lh3.googleusercontent.com/aida-public/AB6AXuBII9kFaHveHT2mTU5Yzc71rj_zpgBueuta06VU8im-KEkMV2--gdYPUTn9g0928J7IgfIFBOnmbRuHg_CnifsVT_CEZ9TtWOgaQlZ-n_4tJ3xlLtIg39sk2kaxWrxsE9BanvXrmTw4A-fVI_G3NSInSalceKIjPyZSvsA8CHU79XAByK32a9vZERDlBIJKt98nunjKdgp2fZTxmDhl8d5xm2EYXtBuSwDUJ8blPJnFu7cTIaCA8Wsqrzd3P9VjqrGEoPEeFxqUIHI", price: 15, duration: "1 hour", rating: 4.4, category: "Tour", lat: 48.8589, lng: 2.3468 },
     ],
     hotels: [
-      { name: "Hôtel Plaza Athénée", description: "Luxurious hotel near Eiffel Tower with Dior spa", price_per_night: 850, rating: 4.9, lat: 48.8700, lng: 2.3075, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
-      { name: "Le Marais Boutique Hotel", description: "Charming boutique hotel in trendy Le Marais district", price_per_night: 220, rating: 4.5, lat: 48.8590, lng: 2.3600, amenities: ["Free WiFi", "Breakfast", "Airport Shuttle"] },
+      { name: "Hôtel Plaza Athénée", description: "Luxurious hotel near Eiffel Tower with Dior spa", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvuxkt3qNKqj3bXUHfyew4e-W_rDAYWj6_Mi25gX-MwMthBoCdBD7oWa5NHEN3sGV0o3OHyrLaMLXHZStWB6RnjgTP1l0SrYaZd9cJXmVRtImNdjG2ZRTl_OjYTnydsu525jYOnKG6Yqe6U4PdfB8pT1g7aUrl5TwkkDShZ_0eJRjO_gB7cz0gfU2jQNff0GxkghB8-O-nc-Kq2n-UthP5lcJGu0Cs4u0wHYI8X4uFy2LZWlrEDmgiBEA", price_per_night: 850, rating: 4.9, lat: 48.8700, lng: 2.3075, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
+      { name: "Le Marais Boutique Hotel", description: "Charming boutique hotel in trendy Le Marais district", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLszQ9O4eIOtqdVhvlOd6IpOoXNub2sR9p1RSahqAGH6M389oJuNG4DshQyqa0tAonMcVTnGPE5LiE3OgKY7hsOA1rCqGtnsoIN3wwK9S1ZNrZzY2nns0sZkg5TSykQ8jXhpOzY815YYJU0QAZbFsBz_Ow8Z646erf-AO5zj4nbZWqVxGC5x_AtToBaToUPHWB7yzw6h7GFytctli0Vsd5mDTG1U3QutUSGgRwqQ3UepOyBQvsS9DTjviA", price_per_night: 220, rating: 4.5, lat: 48.8590, lng: 2.3600, amenities: ["Free WiFi", "Breakfast", "Airport Shuttle"] },
     ],
   },
   {
@@ -56,8 +56,8 @@ const destinations = [
       { name: "Akihabara Electric Town", description: "Electronics district and anime/manga hub", image_url: "https://images.unsplash.com/photo-1683995259187-54142c49338b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEFraWhhYmFyYSUyMEVsZWN0cmljJTIwVG93biUyMHRva3lvfGVufDB8fDB8fHww", price: 0, duration: "3 hours", rating: 4.3, category: "Shopping", lat: 35.7023, lng: 139.7713 },
     ],
     hotels: [
-      { name: "Park Hyatt Tokyo", description: "Luxury hotel in Shinjuku with stunning city views", price_per_night: 500, rating: 4.8, lat: 35.6854, lng: 139.6917, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Bar"] },
-      { name: "APA Hotel Shinjuku", description: "Modern budget hotel near Shinjuku Station", price_per_night: 90, rating: 4.1, lat: 35.6900, lng: 139.7000, amenities: ["Free WiFi", "Restaurant", "Laundry"] },
+      { name: "Park Hyatt Tokyo", description: "Luxury hotel in Shinjuku with stunning city views", image_url: "https://picsum.photos/seed/park-hyatt-tokyo/400/300", price_per_night: 500, rating: 4.8, lat: 35.6854, lng: 139.6917, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Bar"] },
+      { name: "APA Hotel Shinjuku", description: "Modern budget hotel near Shinjuku Station", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLv75tEmB__N-fyqyigWi5DKQkqNkaNTEIRkgsytvB504J2QhZrLuZcwug9OLaa7am10rKglcmvjj6nKmPDDfvH_fFUXNEXt9ZS8EeJxtkoXXNSU1lrF_jOE76MQbE2CKER3-deXvm14Qnh9xFsFwbdRLsZWoJbIzDwWALwDh-XW13eTm36VuetJ5EKdLBc9_BPtNm4lJnq5lXpxUdymMo5kg0EjwNs4z3V-V6Aft4WSXLGuXPhnSOMwjQ", price_per_night: 90, rating: 4.1, lat: 35.6900, lng: 139.7000, amenities: ["Free WiFi", "Restaurant", "Laundry"] },
     ],
   },
   {
@@ -80,8 +80,8 @@ const destinations = [
       { name: "Ubud Art Market", description: "Traditional market with handmade crafts and art", image_url: "https://images.unsplash.com/photo-1769485016794-03c4834c02d9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VWJ1ZCUyMEFydCUyME1hcmtldCUyMGJhbGl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "2 hours", rating: 4.2, category: "Market", lat: -8.5069, lng: 115.2625 },
     ],
     hotels: [
-      { name: "Four Seasons Resort Bali at Sayan", description: "Luxury resort surrounded by riverside jungle", price_per_night: 600, rating: 4.9, lat: -8.5000, lng: 115.2600, amenities: ["Pool", "Spa", "Restaurant", "Yoga", "Free WiFi"] },
-      { name: "The煾in Villas Seminyak", description: "Boutique villas with private pools near beach", price_per_night: 180, rating: 4.4, lat: -8.6900, lng: 115.1500, amenities: ["Pool", "Restaurant", "Free WiFi", "Airport Shuttle"] },
+      { name: "Four Seasons Resort Bali at Sayan", description: "Luxury resort surrounded by riverside jungle", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLuXSno-uPA6ZTWaRO3i38ZbzSOEopaqefxNdn-xuZCriT7hhSSvLXcfJTm0pWCqS2zujgDL7bSEJ5klulP748YeaS174Dt7TM9lger_Gqfd2vvyZHWN9xy9BoeUG2sg3Ft5VZ9Wx-rtzOHSera-tJLpLn6C2vm2pOAaGEOSi9W1nkod_MaJLnMHsLTTh8YOkBfDaxjVETVmBIpt7Sf-UyILp277xCrCUJbE313FBv9oSB-TRfCIKyR-whw", price_per_night: 600, rating: 4.9, lat: -8.5000, lng: 115.2600, amenities: ["Pool", "Spa", "Restaurant", "Yoga", "Free WiFi"] },
+      { name: "The Villas Seminyak", description: "Boutique villas with private pools near beach", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvE4DY3BFGF75P-im6YcWNwTZhBplv8A2j_wbRNnVs3rgtEXfb0TFwcTPzi4ASiry2NJulHG0Q0QdL_3Mz7uybS7Qb6-iAKHm_3lgcgkCdau0KRwSqPwluI4oIFSsYPFSFZJhTpnaJUlloh2kZyIkk-HZMT5v8y5IFVLCSRdDIlM94YZqvmytPDup6IpDNwBfxd3A4FQv6gkUYRpAeCeepsQK6f_nk1xfCV5Kz6XEWmI-XkuGW-kGixSN8", price_per_night: 180, rating: 4.4, lat: -8.6900, lng: 115.1500, amenities: ["Pool", "Restaurant", "Free WiFi", "Airport Shuttle"] },
     ],
   },
   {
@@ -104,8 +104,8 @@ const destinations = [
       { name: "Brooklyn Bridge", description: "Historic suspension bridge with pedestrian walkway", image_url: "https://images.unsplash.com/photo-1477882244523-716124bf91a1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8QnJvb2tseW4lMjBCcmlkZ2UlMjBuZXclMjB5b3JrfGVufDB8fDB8fHww", price: 0, duration: "1 hour", rating: 4.6, category: "Landmark", lat: 40.7061, lng: -73.9969 },
     ],
     hotels: [
-      { name: "The Plaza Hotel", description: "Legendary luxury hotel overlooking Central Park", price_per_night: 700, rating: 4.8, lat: 40.7644, lng: -73.9740, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Concierge"] },
-      { name: "Pod 51 Hotel", description: "Budget-friendly midtown hotel with rooftop", price_per_night: 120, rating: 4.1, lat: 40.7560, lng: -73.9690, amenities: ["Free WiFi", "Rooftop", "Laundry"] },
+      { name: "The Plaza Hotel", description: "Legendary luxury hotel overlooking Central Park", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLv-NF3UrB7nmyKN_dw3HGxkAFNFx2nkpplh0WEouOB-MM4nBWnPlUrEi7MsIIKbf26lW8cbQy--BuZB19lk8XC-cpBa3mTffJoaasOGpGVF9zMnFjo0QZcMzq1RCTnUVC8ZOGe5DenPKFOtR1qeyYFTwERYcR_US51PY5izf9TJNddFYTPAxNR5LmkNEs5z2oMgQlh2CErBpyBtQxBD3ahAejMNn_HcJk33ZKvPK5rshxwmroRYCw1Wh-o", price_per_night: 700, rating: 4.8, lat: 40.7644, lng: -73.9740, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Concierge"] },
+      { name: "Pod 51 Hotel", description: "Budget-friendly midtown hotel with rooftop", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLuJXxu_2avwKeqTqzFY7B6BTIWwRuEsZFJ5VFzmUtv_r2GEGsHFl1cioqXD9908o1uuqOXQ40duM8ip7jbcQOmaQTS3tEVmfgzDd1YTKqY_xrIZQLjnRV2xWljtUzJXI8MKQVxAHtTf6E-1FP3Csen3Ht4EThkOffBMXfWtG-IarueyEht1Te5AALbe6iZQkSTbCdXqAKIAzaTH0Yj4HNHQ7FgsyQr7zn5pjY_zqRoYaFVgfMvVIgdIMx4", price_per_night: 120, rating: 4.1, lat: 40.7560, lng: -73.9690, amenities: ["Free WiFi", "Rooftop", "Laundry"] },
     ],
   },
   {
@@ -128,8 +128,8 @@ const destinations = [
       { name: "Dubai Marina", description: "Waterfront district with restaurants and yacht cruises", image_url: "https://images.unsplash.com/photo-1642137470505-c2f85c227ab8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fER1YmFpJTIwTWFyaW5hJTIwZHViYWl8ZW58MHx8MHx8fDA%3D", price: 0, duration: "2 hours", rating: 4.4, category: "Neighborhood", lat: 25.0800, lng: 55.1400 },
     ],
     hotels: [
-      { name: "Burj Al Arab Jumeirah", description: "Iconic sail-shaped luxury all-suite hotel", price_per_night: 1500, rating: 4.9, lat: 25.1412, lng: 55.1852, amenities: ["Private Beach", "Pool", "Spa", "Restaurant", "Helipad"] },
-      { name: "Rove Downtown", description: "Modern affordable hotel near Burj Khalifa", price_per_night: 100, rating: 4.3, lat: 25.1900, lng: 55.2700, amenities: ["Pool", "Gym", "Free WiFi", "Restaurant"] },
+      { name: "Burj Al Arab Jumeirah", description: "Iconic sail-shaped luxury all-suite hotel", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvFFUXNReoRyObsU0jYL_v-zrbL5BtfVa0kH-lNneL9Hi81yIGY9BEAHgQBUezLAT6z_sNp83i1qmKglFRPgY8Gw6vbHcJ9zt14DmNGYDFZOR1sxpuYyP8tqtz9ztOLfMhVFS6qQtXzNO97XSM5ndYlRkoMrIrpqWsqHyCrbQcz3uS-9pQ8sdfSOaj3FwOe3QioKqSryVJkbTf5EaTZn0wuxM1W_36g8o58lv1LsAgqOtktGipy96oJK4g", price_per_night: 1500, rating: 4.9, lat: 25.1412, lng: 55.1852, amenities: ["Private Beach", "Pool", "Spa", "Restaurant", "Helipad"] },
+      { name: "Rove Downtown", description: "Modern affordable hotel near Burj Khalifa", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLu7ZPUYce_xhr8gWrBg6VNyQrj4-ooKghHxceGSzLfhVH3giGTCd73s3t9Y77n1RN6igQpI-rSGTxKQY2B9HuB9GJ4dyVP0cYvUqIP7Xl52tocmqve-Rn3SCzazibh0TqmTLxHOnNKdjaYc1v2tmcoJZHF5K9hUonY3GqQiMGw3aGptKjfhcUeIe_B3UJtC2rijqsYNlAFQ0OpkMdd_053NaP3Ra6OY60pQehmiMw-Qo57kTHwIhBUbjGs", price_per_night: 100, rating: 4.3, lat: 25.1900, lng: 55.2700, amenities: ["Pool", "Gym", "Free WiFi", "Restaurant"] },
     ],
   },
   {
@@ -152,8 +152,8 @@ const destinations = [
       { name: "Casa Batlló", description: "Gaudí's whimsical modernist masterpiece with mosaic facade", image_url: "https://images.unsplash.com/photo-1641331766603-ef0f5f4d81e2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2F1ZGklMjBob3VzZSUyMGJhcmNlbG9uYXxlbnwwfHwwfHx8MA%3D%3D", price: 0, duration: "2 hours", rating: 4.6, category: "Neighborhood", lat: 41.3916, lng: 2.1650 },
     ],
     hotels: [
-      { name: "Hotel Arts Barcelona", description: "Luxury beachfront hotel with infinity pool", price_per_night: 450, rating: 4.7, lat: 41.3863, lng: 2.1968, amenities: ["Pool", "Spa", "Restaurant", "Beach Access", "Gym"] },
-      { name: "Catalonia Gòtic", description: "Charming hotel in Gothic Quarter with rooftop pool", price_per_night: 130, rating: 4.3, lat: 41.3840, lng: 2.1770, amenities: ["Pool", "Free WiFi", "Breakfast", "Rooftop"] },
+      { name: "Hotel Arts Barcelona", description: "Luxury beachfront hotel with infinity pool", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLumgM7DQC6pm7HOQu96cJDsmQY5ZVE-CW-qJLiuuh_FYcDl49DMmCEzkty5kxvr3OlIhbdOktLUg6q2xSdvny4eW2u0-DkhqMFFkKimUIP-hmrMQzkxfHxqZfYFy4YE1lHxoLStLu79DqSEvwOcC3MLLDUjncCVpfWYIO8ore19inEMkPF-9QNYGOY86ZA79P19IKHKm8sVyDuxA9JXzeeiTRxckhJS2aSekKUK_TZuhWm0EqxDfTW-rQ", price_per_night: 450, rating: 4.7, lat: 41.3863, lng: 2.1968, amenities: ["Pool", "Spa", "Restaurant", "Beach Access", "Gym"] },
+      { name: "Catalonia Gòtic", description: "Charming hotel in Gothic Quarter with rooftop pool", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLuFHZjJWnOHGy3HRmHHvOQGKG4fODn0DEWQrNt5VVEP680_wbhUvEK7AFew6KpABxMemHDJfjSE2CVJbAQMHsWgcDZ6pGWDQf_KEmTETLRYqefZza95QTA7fTyujFBHkAqiubtAUH0T5k4Y0Rt8vG6sMNtR4GrhtvZdPrZ7tday1dv404GJxrVVhbzUJ11uOr-rcrahPHFD1z7yMxEHOCChW3OumWDonHym03aTlo3aTmLMBotg6Qz4RiA", price_per_night: 130, rating: 4.3, lat: 41.3840, lng: 2.1770, amenities: ["Pool", "Free WiFi", "Breakfast", "Rooftop"] },
     ],
   },
   {
@@ -176,8 +176,8 @@ const destinations = [
       { name: "Floating Market", description: "Traditional market on canals with boat vendors", image_url: "https://images.unsplash.com/photo-1588732807335-2132a3f9489e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RmxvYXRpbmclMjBNYXJrZXQlMjBiYW5na29rfGVufDB8fDB8fHww", price: 10, duration: "3 hours", rating: 4.3, category: "Market", lat: 13.7500, lng: 100.4800 },
     ],
     hotels: [
-      { name: "Mandarin Oriental Bangkok", description: "Iconic luxury hotel on the Chao Phraya River", price_per_night: 350, rating: 4.8, lat: 13.7236, lng: 100.5144, amenities: ["Pool", "Spa", "Restaurant", "River View", "Gym"] },
-      { name: "Here Hostel Bangkok", description: "Social hostel with rooftop near Khao San Road", price_per_night: 15, rating: 4.2, lat: 13.7570, lng: 100.4980, amenities: ["Free WiFi", "Rooftop", "Breakfast", "Locker"] },
+      { name: "Mandarin Oriental Bangkok", description: "Iconic luxury hotel on the Chao Phraya River", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvK3nAcfNFSj6v2O_Lku0dlA7zHBnsoqtz1wT-HivH4mJ4fXpf6RbYyn1C9nK9MYUiz6-rpmBCiulR3EtyaQASRGrGjDqdXFLzONwbXB8d0APvSX2W42v7aBG27GHI8M3oSqOL2ROLts1tUQGq2sA19n_grMfXXE1uUIr1_9dohLnOBWXbkDnxW4m5rYLNGtw4vxukYuqbzxFtXhWX2Z8rVmgJQ7kaoe8huvpGUWQfyqRt5hFOzg-Beo-E", price_per_night: 350, rating: 4.8, lat: 13.7236, lng: 100.5144, amenities: ["Pool", "Spa", "Restaurant", "River View", "Gym"] },
+      { name: "Here Hostel Bangkok", description: "Social hostel with rooftop near Khao San Road", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvNg-ilWjoqW0zr3n2acuZDGO48NFG8OBOPx3LDKdtossl6p9q8Y1tzcSfDc6tnddaUTtOPmT3dZ5VnFCLytJK6W8x-5-1odfNg2h3D7lwpSuGN1SwoMNdCXo7fc9V73FwZkJAssfWpWO8sjkr0iP38DeyJoK0wcOiFMDyiAb36YlZAkqhM6rG1vGfFiiStQH6InfCB1TRCYP_ACd9Kax163ZLBmJfXLdEGMet34wZwmPqusywmuMFXa_E", price_per_night: 15, rating: 4.2, lat: 13.7570, lng: 100.4980, amenities: ["Free WiFi", "Rooftop", "Breakfast", "Locker"] },
     ],
   },
   {
@@ -200,8 +200,8 @@ const destinations = [
       { name: "Taronga Zoo", description: "Zoo with native Australian animals and harbor views", image_url: "https://images.unsplash.com/photo-1667083213657-f8f6d461f0ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VGFyb25nYSUyMFpvbyUyMHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D", price: 35, duration: "4 hours", rating: 4.5, category: "Nature", lat: -33.8434, lng: 151.2414 },
     ],
     hotels: [
-      { name: "Shangri-La Sydney", description: "Luxury hotel with Opera House harbor views", price_per_night: 380, rating: 4.7, lat: -33.8610, lng: 151.2100, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Bar"] },
-      { name: "YHA Sydney Harbour", description: "Budget hostel with rooftop and harbor view", price_per_night: 40, rating: 4.3, lat: -33.8580, lng: 151.2120, amenities: ["Free WiFi", "Rooftop", "Kitchen", "Laundry"] },
+      { name: "Shangri-La Sydney", description: "Luxury hotel with Opera House harbor views", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLsKtScEDBUkROynEPAUom6fMM79oGvCSVXtFbNWCB6a9AfD18to82gPdBHpvFcz3R_LRUcTQqkPLhyy-1rgzHbakcYhHCBtPiYubO_GimBnpBbrtPn3bOQdCTAUWKa9N9tFiDZ_L3zJCXPXmCy4IpCzCrr2_MZSKRHOaMlDYFLQU1dQkG0KEU2CKs-lMQBR0eHOASA-zlk70DXHklrTmSVMi2IJOUzbi0iR-2tHUNW6k59BDQWaql595g", price_per_night: 380, rating: 4.7, lat: -33.8610, lng: 151.2100, amenities: ["Pool", "Spa", "Restaurant", "Gym", "Bar"] },
+      { name: "YHA Sydney Harbour", description: "Budget hostel with rooftop and harbor view", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLtKd7TrzQSq3Ik-mcdtGWVp3HqnFD8l1xXTb_IpVZCAxMbTcViqU-2yHwsT1cqsjBoaFXUT8jybErkMQ0YKLhWxLE-6E_LIuICspSzm6THGdbHYkxasyVjv-iVjxCzBSobEvpBq1voTSYX-Ptlnjx7JkULwTGjfyjUGJ7ZjUVrmH5RY-GLlSqr_JgTSt9YBz01H1Itxw36p_Zev0cJ3fuvUJF0FwOPy-VUUf-2Put6T_QieN7rDRgUa_A", price_per_night: 40, rating: 4.3, lat: -33.8580, lng: 151.2120, amenities: ["Free WiFi", "Rooftop", "Kitchen", "Laundry"] },
     ],
   },
   {
@@ -224,8 +224,8 @@ const destinations = [
       { name: "Trastevere", description: "Charming neighborhood with authentic Roman cuisine", image_url: "https://images.unsplash.com/photo-1696407868324-460a69a81c11?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODJ8fFRyYXN0ZXZlcmUlMjByb21lfGVufDB8fDB8fHww", price: 0, duration: "3 hours", rating: 4.6, category: "Neighborhood", lat: 41.8867, lng: 12.4699 },
     ],
     hotels: [
-      { name: "Hotel Eden Rome", description: "Luxury hotel near Spanish Steps with rooftop restaurant", price_per_night: 600, rating: 4.8, lat: 41.9050, lng: 12.4850, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
-      { name: "The Beehive Hostel", description: "Eco-friendly hostel near Termini station", price_per_night: 30, rating: 4.2, lat: 41.9010, lng: 12.5020, amenities: ["Free WiFi", "Garden", "Kitchen", "Breakfast"] },
+      { name: "Hotel Eden Rome", description: "Luxury hotel near Spanish Steps with rooftop restaurant", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvCZH7LwsSRUIe5QnD_MR4viCY4fNY73W1YfEWW2lcs2dGKgWFhJ7upJ4wDOXz9OXExMG5JNdAk0DyREKb9rE2HpLRIxnob-S1sa4GQlnW80t_Ewm9IJbt5-JO2edjZLqDQCpWtyOVz6gveyX4Wvq1QOlq04fvGaptFqhqP4nxi0s632L-4cTBlTxmVp7UwWn6HWu31NVNaZ7njRdeVTfKr7ajXyHMdN04OSOCPP9BFaGiGivc9AkRgELU", price_per_night: 600, rating: 4.8, lat: 41.9050, lng: 12.4850, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
+      { name: "The Beehive Hostel", description: "Eco-friendly hostel near Termini station", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLvAg9tKzwBOEHyY4rhmB1xc2HM3LzVtnZWAMVlSF_oCT72W28rDYOJQuRkB8QGsID3bmygJZxkBn9PS143NzM4pRUGhlDGHnGh-Of8B__vCj9O3yuajvFaueqysJeeW1Yxk43_LFZ587q3E0o838_fxarqVgRtUwC1WhmPzXEDpmE3V-TcjUYNqif4yQRhVwRSyY6XCHAzwz2KAauQKdOIOJbrWqebkdBvFr8G8qvR7iKhjgwfJT7lnpq4", price_per_night: 30, rating: 4.2, lat: 41.9010, lng: 12.5020, amenities: ["Free WiFi", "Garden", "Kitchen", "Breakfast"] },
     ],
   },
   {
@@ -248,8 +248,8 @@ const destinations = [
       { name: "Robben Island", description: "Historical prison where Mandela was held", image_url: "https://images.unsplash.com/photo-1640584139666-c2631301c638?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFJvYmJlbiUyMElzbGFuZCUyMGNhcGUlMjB0b3dufGVufDB8fDB8fHww", price: 30, duration: "4 hours", rating: 4.5, category: "History", lat: -33.8076, lng: 18.3711 },
     ],
     hotels: [
-      { name: "The Silo Hotel", description: "Industrial-chic luxury hotel at the V&A Waterfront", price_per_night: 800, rating: 4.9, lat: -33.9040, lng: 18.4200, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
-      { name: "Once in Cape Town", description: "Modern hostel with rooftop near Long Street", price_per_night: 20, rating: 4.3, lat: -33.9260, lng: 18.4200, amenities: ["Free WiFi", "Rooftop", "Kitchen", "Breakfast"] },
+      { name: "The Silo Hotel", description: "Industrial-chic luxury hotel at the V&A Waterfront", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLt-n2Lb54QjsuXsPEWb_8O71hlv6aN8HzCSebn3hJ6orfW4TOgOEtFrwjURly5uaDM1YsW4MwIiqFSTvtlMwZBQH-sofddUiueco11E5STNciypDrPnqKvbv4QJ3dMjGJUUDBasGUK68tXRe2rJuq2NR5JBf9MWQ1VHJPc-YbsbIgMshicI3ETzOY9PmeAusZn-dM4lYxljseRmudY4VqPVxwgjQxGKbBoFTn3rfF9mzNwnitZCp99kBlY", price_per_night: 800, rating: 4.9, lat: -33.9040, lng: 18.4200, amenities: ["Pool", "Spa", "Restaurant", "Bar", "Gym"] },
+      { name: "Once in Cape Town", description: "Modern hostel with rooftop near Long Street", image_url: "https://lh3.googleusercontent.com/aida/AP1WRLtkcs19q45o0lpG1kwzlunp8sRXfPPNOFbTQJGILwTwcm5uHDdO7tsZDwxEZcfgbaOTV6Ml6t30G9F5LJg4mSK_WgRg_DLsB2n1NrhejxHfyIEbB1XjyD1Zrw4o1NJh0ygu-q6hH5b-Bmc1KKsx5_L6aP6_Q8unh-hqju0Yum4o1ZDMq-zdYAubzoEVjcIJxlhvHdpYcjtueDPwI7C-xk4zgDv6q16lTCLaqZOndrMs9Q-F0Bou0Cx2v9o", price_per_night: 20, rating: 4.3, lat: -33.9260, lng: 18.4200, amenities: ["Free WiFi", "Rooftop", "Kitchen", "Breakfast"] },
     ],
   },
 ]
@@ -309,9 +309,9 @@ async function seed() {
       // Insert hotels
       for (const hotel of dest.hotels) {
         await client.query(
-          `INSERT INTO hotels (destination_id, name, description, price_per_night, rating, lat, lng, amenities)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-          [destId, hotel.name, hotel.description, hotel.price_per_night, hotel.rating, hotel.lat, hotel.lng, hotel.amenities]
+          `INSERT INTO hotels (destination_id, name, description, image_url, price_per_night, rating, lat, lng, amenities)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+          [destId, hotel.name, hotel.description, hotel.image_url, hotel.price_per_night, hotel.rating, hotel.lat, hotel.lng, hotel.amenities]
         )
       }
     }
@@ -330,3 +330,8 @@ async function seed() {
 }
 
 seed()
+
+
+
+
+

@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
+import { Image as ExpoImage } from "expo-image"
 import { LinearGradient } from "expo-linear-gradient"
 
 const tokens = {
@@ -13,7 +14,7 @@ interface QuoteCardProps {
 export function QuoteCard({ imageUrl }: QuoteCardProps) {
   return (
     <View style={styles.card}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <ExpoImage source={{ uri: imageUrl }} style={styles.image} contentFit="cover" />
       <LinearGradient
         colors={["transparent", "rgba(0,0,0,0.7)"]}
         locations={[0.6, 1]}
