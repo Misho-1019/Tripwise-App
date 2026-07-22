@@ -57,7 +57,20 @@ router.post("/", async (req: AuthRequest, res: Response) => {
        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
       [req.userId, name, destination_id, start_date, end_date, budget]
     )
-    res.status(201).json({ trip: result.rows[0] })
+    const trip = result.rows[0]
+
+    const start = new Date(start_date)
+    const end = new Date(end_date)
+    let dayNumber = 1
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+      await pool.query(
+        `INSERT INTO trip_days (trip_id, date, day_number) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`,
+        [trip.id, d.toISOString().split("T")[0], dayNumber]
+      )
+      dayNumber++
+    }
+
+    res.status(201).json({ trip })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ error: error.errors[0].message })

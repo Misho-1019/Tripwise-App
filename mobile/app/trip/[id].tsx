@@ -1,9 +1,10 @@
 import { useState, useCallback, useMemo } from "react"
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList, Modal, TextInput, KeyboardAvoidingView, Platform, Image } from "react-native"
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList, Image } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { useLocalSearchParams, router } from "expo-router"
 import { useTrip } from "../../hooks/useTrips"
 import { TimelineActivity } from "../../components/trip/TimelineActivity"
+import { AddActivitySheet } from "../../components/trip/AddActivitySheet"
 import { TripActivity, TripDay } from "../../types"
 import { formatCurrency, getDurationDays } from "../../lib/utils"
 
@@ -222,28 +223,14 @@ export default function TripBuilderScreen() {
         <Text style={styles.fabIcon}>+</Text>
       </TouchableOpacity>
 
-      {/* Add Activity Modal */}
-      <Modal
+      <AddActivitySheet
         visible={showAddSheet}
-        transparent
-        animationType="slide"
-        onRequestClose={() => setShowAddSheet(false)}
-      >
-        <KeyboardAvoidingView
-          style={styles.modalOverlay}
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
-        >
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Add Activity</Text>
-              <TouchableOpacity onPress={() => setShowAddSheet(false)}>
-                <Text style={styles.modalClose}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.placeholderText}>Activity picker coming next</Text>
-          </View>
-        </KeyboardAvoidingView>
-      </Modal>
+        onClose={() => setShowAddSheet(false)}
+        destinationId={trip.destination_id}
+        tripId={trip.id}
+        dayId={activeDay?.id || ""}
+        nextOrderIndex={activities.length}
+      />
     </View>
   )
 }
@@ -457,40 +444,5 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     marginTop: -2,
   },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
-    justifyContent: "flex-end",
-  },
-  modalContent: {
-    backgroundColor: tokens.surface,
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    padding: 24,
-    paddingBottom: 40,
-    minHeight: 300,
-  },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-  },
-  modalTitle: {
-    fontFamily: tokens.fontHeadline,
-    fontSize: 20,
-    fontWeight: "700",
-    color: tokens.text,
-  },
-  modalClose: {
-    fontSize: 20,
-    color: tokens.textSecondary,
-  },
-  placeholderText: {
-    fontFamily: tokens.fontBodyMedium,
-    fontSize: 14,
-    color: tokens.textSecondary,
-    textAlign: "center",
-    paddingVertical: 40,
-  },
+
 })
