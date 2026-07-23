@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from "react-native"
 import { TripActivity } from "../../types"
 
 const tokens = {
@@ -55,10 +55,10 @@ interface TimelineActivityProps {
   isLast: boolean
   onDrag?: () => void
   onPress?: () => void
-  onInfoPress?: () => void
+  onDeletePress?: () => void
 }
 
-export function TimelineActivity({ activity, isLast, onDrag, onPress, onInfoPress }: TimelineActivityProps) {
+export function TimelineActivity({ activity, isLast, onDrag, onPress, onDeletePress }: TimelineActivityProps) {
   const icon = activity.attraction_name
     ? categoryIcons[activity.attraction_name] || "📍"
     : "📍"
@@ -107,9 +107,19 @@ export function TimelineActivity({ activity, isLast, onDrag, onPress, onInfoPres
                 <Text style={styles.dragIcon}>⠿</Text>
               </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={onInfoPress} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-              <Text style={styles.categoryIcon}>{icon}</Text>
-            </TouchableOpacity>
+            <View style={styles.iconStack}>
+              <TouchableOpacity onPress={() => {
+                const query = encodeURIComponent(`${activity.title}`)
+                Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`)
+              }} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+                <Text style={styles.categoryIcon}>📍</Text>
+              </TouchableOpacity>
+              {onDeletePress && (
+                <TouchableOpacity onPress={onDeletePress} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+                  <Text style={styles.deleteIcon}>🗑️</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
         </TouchableOpacity>
       </View>
@@ -213,7 +223,15 @@ const styles = StyleSheet.create({
     color: tokens.outline,
   },
   categoryIcon: {
-    fontSize: 18,
-    opacity: 0.6,
+    fontSize: 16,
+    opacity: 0.5,
+  },
+  iconStack: {
+    alignItems: "center",
+    gap: 8,
+  },
+  deleteIcon: {
+    fontSize: 16,
+    opacity: 0.5,
   },
 })
