@@ -36,7 +36,7 @@ const createActivitySchema = z.object({
   start_time: z.string().regex(/^\d{2}:\d{2}$/).optional(),
   end_time: z.string().regex(/^\d{2}:\d{2}$/).optional(),
   notes: z.string().optional(),
-  cost: z.number().positive().optional(),
+  cost: z.number().nonnegative().optional(),
   order_index: z.number().int().min(0),
 })
 
