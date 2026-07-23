@@ -1,5 +1,6 @@
-import { useState } from "react"
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Share, Alert, TextInput } from "react-native"
+import { useState, useCallback } from "react"
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Alert, TextInput, Linking } from "react-native"
+import * as Clipboard from "expo-clipboard"
 import { useDeleteTrip, useUpdateTrip } from "../../hooks/useTrips"
 import { router } from "expo-router"
 
@@ -30,29 +31,58 @@ interface TripMenuProps {
   onUpdate: () => void
 }
 
+function shareText(destinationName?: string, tripName?: string, dateRange?: string, tripBudget?: number): string {
+  const lines = [`✈️ Trip to ${destinationName || tripName || "Unknown"}`]
+  if (dateRange) lines.push(`📅 ${dateRange}`)
+  if (tripBudget) lines.push(`💰 Budget: $${tripBudget}`)
+  lines.push("")
+  lines.push("Plan your own trips with TripWise!")
+  return lines.join("\n")
+}
+
 export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, destinationName, dateRange, onUpdate }: TripMenuProps) {
   const [showEdit, setShowEdit] = useState(false)
+  const [showShare, setShowShare] = useState(false)
   const [editName, setEditName] = useState(tripName)
   const [editBudget, setEditBudget] = useState(tripBudget?.toString() || "")
 
   const deleteTrip = useDeleteTrip()
   const updateTrip = useUpdateTrip()
 
-  const handleShare = async () => {
+  const handleCopy = useCallback(async () => {
+    const text = shareText(destinationName, tripName, dateRange, tripBudget)
+    await Clipboard.setStringAsync(text)
+    setShowShare(false)
+    onClose()
+    Alert.alert("Copied!", "Trip details copied to clipboard.")
+  }, [destinationName, tripName, dateRange, tripBudget, onClose])
+
+  const handleEmail = useCallback(() => {
+    const subject = encodeURIComponent(`Trip to ${destinationName || tripName}`)
+    const body = encodeURIComponent(shareText(destinationName, tripName, dateRange, tripBudget))
+    setShowShare(false)
+    onClose()
+    Linking.openURL(`mailto:?subject=${subject}&body=${body}`)
+  }, [destinationName, tripName, dateRange, tripBudget, onClose])
+
+  const handleWhatsApp = useCallback(() => {
+    const text = encodeURIComponent(shareText(destinationName, tripName, dateRange, tripBudget))
+    setShowShare(false)
+    onClose()
+    Linking.openURL(`whatsapp://send?text=${text}`)
+  }, [destinationName, tripName, dateRange, tripBudget, onClose])
+
+  const handleMore = useCallback(async () => {
+    setShowShare(false)
     onClose()
     try {
-      const lines = [`✈️ Trip to ${destinationName || tripName}`]
-      if (dateRange) lines.push(`📅 ${dateRange}`)
-      if (tripBudget) lines.push(`💰 Budget: $${tripBudget}`)
-      lines.push("")
-      lines.push("Plan your own trips with TripWise!")
-      await Share.share({ message: lines.join("\n") })
-    } catch {
-      Alert.alert("Share", "Unable to open share sheet on this device.")
-    }
-  }
+      const text = shareText(destinationName, tripName, dateRange, tripBudget)
+      const { Share } = require("react-native")
+      await Share.share({ message: text })
+    } catch {}
+  }, [destinationName, tripName, dateRange, tripBudget, onClose])
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     onClose()
     Alert.alert("Delete Trip", "Are you sure you want to delete this trip? This cannot be undone.", [
       { text: "Cancel", style: "cancel" },
@@ -68,9 +98,9 @@ export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, desti
         },
       },
     ])
-  }
+  }, [onClose, deleteTrip, tripId])
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = useCallback(() => {
     if (!editName.trim()) return
     updateTrip.mutate(
       {
@@ -88,11 +118,11 @@ export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, desti
         },
       },
     )
-  }
+  }, [editName, editBudget, tripId, updateTrip, onClose, onUpdate])
 
   return (
     <>
-      <Modal visible={visible && !showEdit} transparent animationType="slide" onRequestClose={onClose}>
+      <Modal visible={visible && !showEdit && !showShare} transparent animationType="slide" onRequestClose={onClose}>
         <TouchableOpacity style={styles.overlay} activeOpacity={1} onPress={onClose}>
           <View />
         </TouchableOpacity>
@@ -108,7 +138,7 @@ export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, desti
 
           <View style={styles.divider} />
 
-          <TouchableOpacity style={styles.menuItem} onPress={handleShare} activeOpacity={0.7}>
+          <TouchableOpacity style={styles.menuItem} onPress={() => setShowShare(true)} activeOpacity={0.7}>
             <Text style={styles.menuIcon}>📤</Text>
             <Text style={styles.menuLabel}>Share Trip</Text>
           </TouchableOpacity>
@@ -169,6 +199,49 @@ export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, desti
 
           <TouchableOpacity style={styles.cancelButton} onPress={() => setShowEdit(false)} activeOpacity={0.7}>
             <Text style={styles.cancelText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      <Modal visible={showShare} transparent animationType="slide" onRequestClose={() => setShowShare(false)}>
+        <TouchableOpacity style={styles.overlay} activeOpacity={1} onPress={() => setShowShare(false)}>
+          <View />
+        </TouchableOpacity>
+        <View style={styles.sheet}>
+          <View style={styles.handleRow}>
+            <View style={styles.handle} />
+          </View>
+
+          <Text style={styles.editTitle}>Share Trip</Text>
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleCopy} activeOpacity={0.7}>
+            <Text style={styles.menuIcon}>📋</Text>
+            <Text style={styles.menuLabel}>Copy to Clipboard</Text>
+          </TouchableOpacity>
+
+          <View style={styles.divider} />
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleEmail} activeOpacity={0.7}>
+            <Text style={styles.menuIcon}>📧</Text>
+            <Text style={styles.menuLabel}>Send via Email</Text>
+          </TouchableOpacity>
+
+          <View style={styles.divider} />
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleWhatsApp} activeOpacity={0.7}>
+            <Text style={styles.menuIcon}>💬</Text>
+            <Text style={styles.menuLabel}>Send via WhatsApp</Text>
+          </TouchableOpacity>
+
+          <View style={styles.divider} />
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleMore} activeOpacity={0.7}>
+            <Text style={styles.menuIcon}>✈️</Text>
+            <Text style={styles.menuLabel}>More...</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.cancelButton} onPress={() => setShowShare(false)} activeOpacity={0.7}>
+            <Text style={styles.cancelText}>Back</Text>
           </TouchableOpacity>
         </View>
       </Modal>
