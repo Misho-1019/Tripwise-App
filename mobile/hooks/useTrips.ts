@@ -58,6 +58,7 @@ export function useAddActivity() {
         start_time?: string
         end_time?: string
         notes?: string
+        cost?: number
         order_index: number
       }
     }) => {

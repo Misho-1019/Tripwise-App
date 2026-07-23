@@ -36,6 +36,7 @@ const createActivitySchema = z.object({
   start_time: z.string().regex(/^\d{2}:\d{2}$/).optional(),
   end_time: z.string().regex(/^\d{2}:\d{2}$/).optional(),
   notes: z.string().optional(),
+  cost: z.number().positive().optional(),
   order_index: z.number().int().min(0),
 })
 
@@ -254,9 +255,9 @@ router.post("/:id/days/:dayId/activities", async (req: AuthRequest, res: Respons
 
     const result = await pool.query(
       `INSERT INTO trip_activities (trip_day_id, attraction_id, title, start_time, end_time, notes, order_index, cost)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, (SELECT COALESCE(price, 0) FROM attractions WHERE id = $2))
+       VALUES ($1, $2, $3, $4, $5, $6, $7, COALESCE($8, (SELECT price FROM attractions WHERE id = $2), 0))
        RETURNING *`,
-      [req.params.dayId, body.attraction_id, body.title, body.start_time, body.end_time, body.notes, body.order_index]
+      [req.params.dayId, body.attraction_id, body.title, body.start_time, body.end_time, body.notes, body.order_index, body.cost]
     )
 
     res.status(201).json({ activity: result.rows[0] })

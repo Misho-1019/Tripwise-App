@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useRef } from "react"
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Modal, KeyboardAvoidingView, Platform } from "react-native"
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Modal, KeyboardAvoidingView, Platform, Alert } from "react-native"
 import { useAttractions } from "../../hooks/useDestinations"
 import { useAddActivity } from "../../hooks/useTrips"
 import { Attraction } from "../../types"
@@ -52,9 +52,10 @@ interface AddActivitySheetProps {
   tripId: string
   dayId: string
   nextOrderIndex: number
+  remainingBudget?: number | null
 }
 
-export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayId, nextOrderIndex }: AddActivitySheetProps) {
+export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayId, nextOrderIndex, remainingBudget }: AddActivitySheetProps) {
   const [searchText, setSearchText] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
   const [selectedAttractionId, setSelectedAttractionId] = useState<string | null>(null)
@@ -63,6 +64,7 @@ export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayI
   const [manualStartTime, setManualStartTime] = useState("")
   const [manualEndTime, setManualEndTime] = useState("")
   const [manualNotes, setManualNotes] = useState("")
+  const [manualCost, setManualCost] = useState("")
   const scrollRef = useRef<ScrollView>(null)
 
   const { data: attrData, isLoading } = useAttractions(destinationId, activeCategory !== "All" ? { category: activeCategory } : undefined)
@@ -103,50 +105,66 @@ export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayI
     setManualStartTime("")
     setManualEndTime("")
     setManualNotes("")
+    setManualCost("")
   }, [])
 
   const handleAddToDay = useCallback(() => {
-    if (selectedAttractionId) {
-      const attr = attractions.find((a) => a.id === selectedAttractionId)
-      addActivity.mutate(
-        {
-          tripId,
-          dayId,
-          data: {
-            title: attr?.name || "",
-            attraction_id: selectedAttractionId,
-            order_index: nextOrderIndex,
+    const doAdd = () => {
+      if (selectedAttractionId) {
+        const attr = attractions.find((a) => a.id === selectedAttractionId)
+        addActivity.mutate(
+          {
+            tripId, dayId,
+            data: {
+              title: attr?.name || "",
+              attraction_id: selectedAttractionId,
+              cost: attr?.price ?? undefined,
+              order_index: nextOrderIndex,
+            },
           },
-        },
-        {
-          onSuccess: () => {
-            handleReset()
-            onClose()
+          {
+            onSuccess: () => { handleReset(); onClose() },
+            onError: (err: any) => { Alert.alert("Error", err?.message || "Failed to add activity") },
           },
-        },
-      )
-    } else if (showManual && manualTitle.trim()) {
-      addActivity.mutate(
-        {
-          tripId,
-          dayId,
-          data: {
-            title: manualTitle.trim(),
-            start_time: manualStartTime || undefined,
-            end_time: manualEndTime || undefined,
-            notes: manualNotes || undefined,
-            order_index: nextOrderIndex,
+        )
+      } else if (showManual && manualTitle.trim()) {
+        addActivity.mutate(
+          {
+            tripId, dayId,
+            data: {
+              title: manualTitle.trim(),
+              start_time: manualStartTime || undefined,
+              end_time: manualEndTime || undefined,
+              notes: manualNotes || undefined,
+              cost: manualCost ? Number(manualCost) : undefined,
+              order_index: nextOrderIndex,
+            },
           },
-        },
-        {
-          onSuccess: () => {
-            handleReset()
-            onClose()
+          {
+            onSuccess: () => { handleReset(); onClose() },
+            onError: (err: any) => { Alert.alert("Error", err?.message || "Failed to add activity") },
           },
-        },
-      )
+        )
+      }
     }
-  }, [selectedAttractionId, showManual, manualTitle, manualStartTime, manualEndTime, manualNotes, attractions, tripId, dayId, nextOrderIndex, addActivity, handleReset, onClose])
+
+    const activityCost = selectedAttractionId
+      ? attractions.find((a) => a.id === selectedAttractionId)?.price ?? 0
+      : manualCost ? Number(manualCost) : 0
+
+    if (remainingBudget != null && activityCost > remainingBudget) {
+      Alert.alert(
+        "Budget Exceeded",
+        `This activity costs $${activityCost}, but you only have $${remainingBudget} remaining. Add anyway?`,
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Add Anyway", onPress: doAdd },
+        ],
+      )
+    } else {
+      doAdd()
+    }
+  }, [selectedAttractionId, showManual, manualTitle, manualStartTime, manualEndTime, manualNotes, manualCost, attractions, tripId, dayId, nextOrderIndex, remainingBudget, addActivity, handleReset, onClose])
 
   const canAdd = !!(selectedAttractionId || (showManual && manualTitle.trim()))
 
@@ -319,7 +337,20 @@ export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayI
                     textAlignVertical="top"
                   />
                 </View>
-
+                <View style={styles.fieldGroup}>
+                  <Text style={styles.fieldLabel}>ESTIMATED COST</Text>
+                  <View style={styles.costWrapper}>
+                    <Text style={styles.costPrefix}>$</Text>
+                    <TextInput
+                      style={[styles.fieldInput, { paddingLeft: 28 }]}
+                      placeholder="0.00"
+                      placeholderTextColor={tokens.outlineVariant}
+                      value={manualCost}
+                      onChangeText={setManualCost}
+                      keyboardType="decimal-pad"
+                    />
+                  </View>
+                </View>
               </View>
             )}
 
@@ -613,6 +644,18 @@ const styles = StyleSheet.create({
   fieldTextarea: {
     minHeight: 80,
     paddingTop: 14,
+  },
+  costWrapper: {
+    position: "relative",
+  },
+  costPrefix: {
+    position: "absolute",
+    left: 16,
+    top: 14,
+    fontFamily: tokens.fontBodyBold,
+    fontSize: 17,
+    color: tokens.textSecondary,
+    zIndex: 1,
   },
 
   footer: {

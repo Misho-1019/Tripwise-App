@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react"
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList, Image } from "react-native"
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList, Image, Linking } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { useLocalSearchParams, router } from "expo-router"
 import { useTrip } from "../../hooks/useTrips"
@@ -72,15 +72,31 @@ export default function TripBuilderScreen() {
 
   const statusInfo = trip ? statusConfig[trip.status] || statusConfig.planning : statusConfig.planning
 
+  const totalSpent = useMemo(
+    () => days.reduce((sum, d) => sum + d.activities.reduce((s, a) => s + (a.cost || 0), 0), 0),
+    [days],
+  )
+  const hasBudget = trip?.budget != null && trip.budget > 0
+  const remaining = hasBudget ? (trip.budget || 0) - totalSpent : 0
+  const spentPct = hasBudget ? Math.min(totalSpent / (trip?.budget || 1), 1) : 0
+  const barColor = spentPct > 0.8 ? "#FF3B30" : spentPct > 0.5 ? "#FF9F0A" : "#34C759"
+
   const renderActivity = useCallback(
     ({ item, index }: { item: TripActivity; index: number }) => (
       <TimelineActivity
         activity={item}
         isLast={index === activities.length - 1}
-        onPress={() => {}}
+        onPress={() => {
+          if (item.lat != null && item.lng != null) {
+            Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${item.lat},${item.lng}`)
+          } else {
+            const query = encodeURIComponent(`${item.title} ${trip?.destination_name || ""}`)
+            Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`)
+          }
+        }}
       />
     ),
-    [activities.length],
+    [activities.length, trip?.destination_name],
   )
 
   const keyExtractor = useCallback((item: TripActivity) => item.id, [])
@@ -149,8 +165,19 @@ export default function TripBuilderScreen() {
             <Text style={styles.heroTitle}>{trip.destination_name || "Destination"}</Text>
             <Text style={styles.heroSubtitle}>
               {formatDateRange(trip.start_date, trip.end_date)}
-              {trip.budget != null ? ` • ${formatCurrency(trip.budget)}` : ""}
+              {hasBudget ? ` • ${formatCurrency(trip.budget!)} budget` : ""}
             </Text>
+            {hasBudget && (
+              <View style={styles.budgetSection}>
+                <View style={styles.barBg}>
+                  <View style={[styles.barFill, { width: `${spentPct * 100}%`, backgroundColor: barColor }]} />
+                </View>
+                <View style={styles.budgetRow}>
+                  <Text style={styles.budgetLabel}>Spent: {formatCurrency(totalSpent)}</Text>
+                  <Text style={styles.budgetLabel}>Left: {formatCurrency(remaining)}</Text>
+                </View>
+              </View>
+            )}
           </View>
         </View>
 
@@ -232,6 +259,7 @@ export default function TripBuilderScreen() {
         tripId={trip.id}
         dayId={activeDay?.id || ""}
         nextOrderIndex={activities.length}
+        remainingBudget={hasBudget ? remaining : null}
       />
 
       <TripMenu
@@ -326,6 +354,31 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "rgba(255,255,255,0.85)",
     marginTop: 4,
+  },
+  budgetSection: {
+    marginTop: 12,
+    gap: 6,
+  },
+  barBg: {
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    overflow: "hidden",
+  },
+  barFill: {
+    height: "100%",
+    borderRadius: 3,
+  },
+  budgetRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  budgetLabel: {
+    fontFamily: tokens.fontBodyBold,
+    fontSize: 11,
+    color: "rgba(255,255,255,0.75)",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   header: {
     position: "absolute",
