@@ -149,7 +149,7 @@ export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayI
     }
 
     const activityCost = selectedAttractionId
-      ? attractions.find((a) => a.id === selectedAttractionId)?.price ?? 0
+      ? Number(attractions.find((a) => a.id === selectedAttractionId)?.price ?? 0)
       : manualCost ? Number(manualCost) : 0
 
     if (remainingBudget != null && activityCost > remainingBudget) {

@@ -74,12 +74,12 @@ export default function TripBuilderScreen() {
   const statusInfo = trip ? statusConfig[trip.status] || statusConfig.planning : statusConfig.planning
 
   const totalSpent = useMemo(
-    () => days.reduce((sum, d) => sum + d.activities.reduce((s, a) => s + (a.cost || 0), 0), 0),
+    () => days.reduce((sum, d) => sum + d.activities.reduce((s, a) => s + Number(a.cost || 0), 0), 0),
     [days],
   )
-  const hasBudget = trip?.budget != null && trip.budget > 0
-  const remaining = hasBudget ? (trip.budget || 0) - totalSpent : 0
-  const spentPct = hasBudget ? Math.min(totalSpent / (trip?.budget || 1), 1) : 0
+  const hasBudget = trip?.budget != null && Number(trip.budget) > 0
+  const remaining = hasBudget ? Number(trip.budget || 0) - totalSpent : 0
+  const spentPct = hasBudget ? Math.min(totalSpent / Number(trip?.budget || 1), 1) : 0
   const barColor = spentPct > 0.8 ? "#FF3B30" : spentPct > 0.5 ? "#FF9F0A" : "#34C759"
 
   const handleDeleteActivity = useCallback(
