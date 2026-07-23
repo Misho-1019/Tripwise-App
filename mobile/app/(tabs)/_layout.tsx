@@ -1,5 +1,5 @@
-import { Tabs } from "expo-router"
-import { Text } from "react-native"
+import { Tabs, router } from "expo-router"
+import { Text, Pressable } from "react-native"
 
 export default function TabLayout() {
   return (
@@ -52,6 +52,11 @@ export default function TabLayout() {
         options={{
           title: "AI",
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 22, color }}>🤖</Text>,
+          tabBarButton: (props) => (
+            <Pressable onPress={() => router.navigate("/ai-planner")} style={props.style}>
+              {props.children}
+            </Pressable>
+          ),
         }}
       />
     </Tabs>
