@@ -55,9 +55,10 @@ interface TimelineActivityProps {
   isLast: boolean
   onDrag?: () => void
   onPress?: () => void
+  onInfoPress?: () => void
 }
 
-export function TimelineActivity({ activity, isLast, onDrag, onPress }: TimelineActivityProps) {
+export function TimelineActivity({ activity, isLast, onDrag, onPress, onInfoPress }: TimelineActivityProps) {
   const icon = activity.attraction_name
     ? categoryIcons[activity.attraction_name] || "📍"
     : "📍"
@@ -106,7 +107,9 @@ export function TimelineActivity({ activity, isLast, onDrag, onPress }: Timeline
                 <Text style={styles.dragIcon}>⠿</Text>
               </TouchableOpacity>
             )}
-            <Text style={styles.categoryIcon}>{icon}</Text>
+            <TouchableOpacity onPress={onInfoPress} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+              <Text style={styles.categoryIcon}>{icon}</Text>
+            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </View>

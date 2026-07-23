@@ -1,8 +1,8 @@
 import { useState, useCallback, useMemo } from "react"
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList, Image, Linking } from "react-native"
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList, Image, Linking, Alert, Modal } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { useLocalSearchParams, router } from "expo-router"
-import { useTrip } from "../../hooks/useTrips"
+import { useTrip, useDeleteActivity } from "../../hooks/useTrips"
 import { TimelineActivity } from "../../components/trip/TimelineActivity"
 import { AddActivitySheet } from "../../components/trip/AddActivitySheet"
 import { TripMenu } from "../../components/trip/TripMenu"
@@ -50,8 +50,10 @@ export default function TripBuilderScreen() {
   const [activeDayIndex, setActiveDayIndex] = useState(0)
   const [showAddSheet, setShowAddSheet] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [activityAction, setActivityAction] = useState<TripActivity | null>(null)
 
   const { data, isLoading, error, refetch } = useTrip(id || "")
+  const deleteActivity = useDeleteActivity()
 
   const trip = data?.trip
   const days: TripDay[] = data?.days || []
@@ -81,6 +83,23 @@ export default function TripBuilderScreen() {
   const spentPct = hasBudget ? Math.min(totalSpent / (trip?.budget || 1), 1) : 0
   const barColor = spentPct > 0.8 ? "#FF3B30" : spentPct > 0.5 ? "#FF9F0A" : "#34C759"
 
+  const handleDeleteActivity = useCallback(() => {
+    if (!activityAction || !activeDay) return
+    Alert.alert("Delete Activity", `Remove "${activityAction.title}" from this day?`, [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => {
+          deleteActivity.mutate(
+            { tripId: trip!.id, dayId: activeDay.id, activityId: activityAction.id },
+            { onSuccess: () => setActivityAction(null) },
+          )
+        },
+      },
+    ])
+  }, [activityAction, activeDay, trip, deleteActivity])
+
   const renderActivity = useCallback(
     ({ item, index }: { item: TripActivity; index: number }) => (
       <TimelineActivity
@@ -94,6 +113,7 @@ export default function TripBuilderScreen() {
             Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`)
           }
         }}
+        onInfoPress={() => setActivityAction(item)}
       />
     ),
     [activities.length, trip?.destination_name],
@@ -270,6 +290,52 @@ export default function TripBuilderScreen() {
         tripBudget={trip.budget ?? undefined}
         onUpdate={() => refetch()}
       />
+
+      <Modal visible={!!activityAction} transparent animationType="slide" onRequestClose={() => setActivityAction(null)}>
+        <TouchableOpacity style={styles.overlayBg} activeOpacity={1} onPress={() => setActivityAction(null)} />
+        <View style={styles.actionSheet}>
+          <View style={styles.handleRow}>
+            <View style={styles.handle} />
+          </View>
+
+          {activityAction && (
+            <Text style={styles.actionTitle} numberOfLines={1}>{activityAction.title}</Text>
+          )}
+
+          <TouchableOpacity
+            style={styles.actionItem}
+            onPress={() => {
+              const act = activityAction
+              setActivityAction(null)
+              if (act) {
+                if (act.lat != null && act.lng != null) {
+                  Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${act.lat},${act.lng}`)
+                } else {
+                  const query = encodeURIComponent(`${act.title} ${trip.destination_name || ""}`)
+                  Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`)
+                }
+              }
+            }}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.actionIcon}>📍</Text>
+            <Text style={styles.actionLabel}>Open in Maps</Text>
+          </TouchableOpacity>
+
+          <View style={styles.actionDivider} />
+
+          <TouchableOpacity style={styles.actionItem} onPress={handleDeleteActivity} activeOpacity={0.7}>
+            <Text style={styles.actionIcon}>🗑️</Text>
+            <Text style={[styles.actionLabel, { color: "#FF3B30" }]}>Delete Activity</Text>
+          </TouchableOpacity>
+
+          <View style={styles.actionDivider} />
+
+          <TouchableOpacity style={styles.actionCancel} onPress={() => setActivityAction(null)} activeOpacity={0.7}>
+            <Text style={styles.actionCancelText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   )
 }
@@ -508,5 +574,67 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     marginTop: -2,
   },
-
+  overlayBg: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
+  },
+  actionSheet: {
+    backgroundColor: tokens.surface,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+  },
+  handleRow: {
+    alignItems: "center",
+    paddingTop: 12,
+    paddingBottom: 8,
+  },
+  handle: {
+    width: 48,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: tokens.outlineVariant,
+    opacity: 0.4,
+  },
+  actionTitle: {
+    fontFamily: tokens.fontHeadline,
+    fontSize: 18,
+    fontWeight: "700",
+    color: tokens.text,
+    marginBottom: 20,
+    marginTop: 8,
+  },
+  actionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    paddingVertical: 16,
+  },
+  actionIcon: {
+    fontSize: 22,
+    width: 32,
+  },
+  actionLabel: {
+    fontFamily: tokens.fontBodyMedium,
+    fontSize: 16,
+    color: tokens.text,
+  },
+  actionDivider: {
+    height: 1,
+    backgroundColor: tokens.outlineVariant,
+    opacity: 0.2,
+  },
+  actionCancel: {
+    marginTop: 24,
+    paddingVertical: 16,
+    borderRadius: 9999,
+    backgroundColor: tokens.surfaceContainer,
+    alignItems: "center",
+  },
+  actionCancelText: {
+    fontFamily: tokens.fontBodyBold,
+    fontSize: 16,
+    color: tokens.textSecondary,
+  },
 })

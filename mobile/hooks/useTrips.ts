@@ -108,6 +108,27 @@ export function useUpdateTrip() {
   })
 }
 
+export function useDeleteActivity() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({
+      tripId,
+      dayId,
+      activityId,
+    }: {
+      tripId: string
+      dayId: string
+      activityId: string
+    }) => {
+      const res = await api.delete(`/trips/${tripId}/days/${dayId}/activities/${activityId}`)
+      return res.data
+    },
+    onSuccess: (_, vars) => {
+      queryClient.invalidateQueries({ queryKey: ["trip", vars.tripId] })
+    },
+  })
+}
+
 export function useReorderActivities() {
   const queryClient = useQueryClient()
   return useMutation({
