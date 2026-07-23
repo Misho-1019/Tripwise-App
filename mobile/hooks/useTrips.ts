@@ -70,6 +70,43 @@ export function useAddActivity() {
   })
 }
 
+export function useDeleteTrip() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (tripId: string) => {
+      const res = await api.delete(`/trips/${tripId}`)
+      return res.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["trips"] })
+    },
+  })
+}
+
+export function useUpdateTrip() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({
+      tripId,
+      data,
+    }: {
+      tripId: string
+      data: {
+        name?: string
+        budget?: number
+        status?: "planning" | "ongoing" | "completed"
+      }
+    }) => {
+      const res = await api.put(`/trips/${tripId}`, data)
+      return res.data as { trip: Trip }
+    },
+    onSuccess: (_, vars) => {
+      queryClient.invalidateQueries({ queryKey: ["trip", vars.tripId] })
+      queryClient.invalidateQueries({ queryKey: ["trips"] })
+    },
+  })
+}
+
 export function useReorderActivities() {
   const queryClient = useQueryClient()
   return useMutation({

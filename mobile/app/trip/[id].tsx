@@ -5,6 +5,7 @@ import { useLocalSearchParams, router } from "expo-router"
 import { useTrip } from "../../hooks/useTrips"
 import { TimelineActivity } from "../../components/trip/TimelineActivity"
 import { AddActivitySheet } from "../../components/trip/AddActivitySheet"
+import { TripMenu } from "../../components/trip/TripMenu"
 import { TripActivity, TripDay } from "../../types"
 import { formatCurrency, getDurationDays } from "../../lib/utils"
 
@@ -48,8 +49,9 @@ export default function TripBuilderScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
   const [activeDayIndex, setActiveDayIndex] = useState(0)
   const [showAddSheet, setShowAddSheet] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
 
-  const { data, isLoading, error } = useTrip(id || "")
+  const { data, isLoading, error, refetch } = useTrip(id || "")
 
   const trip = data?.trip
   const days: TripDay[] = data?.days || []
@@ -116,7 +118,7 @@ export default function TripBuilderScreen() {
             <Text style={styles.headerSubtitle} numberOfLines={1}>{trip.name}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.headerButton}>
+        <TouchableOpacity style={styles.headerButton} onPress={() => setShowMenu(true)}>
           <Text style={styles.headerButtonText}>⋮</Text>
         </TouchableOpacity>
       </View>
@@ -230,6 +232,15 @@ export default function TripBuilderScreen() {
         tripId={trip.id}
         dayId={activeDay?.id || ""}
         nextOrderIndex={activities.length}
+      />
+
+      <TripMenu
+        visible={showMenu}
+        onClose={() => setShowMenu(false)}
+        tripId={trip.id}
+        tripName={trip.name}
+        tripBudget={trip.budget ?? undefined}
+        onUpdate={() => refetch()}
       />
     </View>
   )
