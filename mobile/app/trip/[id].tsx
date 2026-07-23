@@ -289,11 +289,11 @@ export default function TripBuilderScreen() {
         onClose={() => setShowMenu(false)}
         tripId={trip.id}
         tripName={trip.name}
-        tripBudget={trip.budget ?? undefined}
+        tripBudget={trip.budget ? Number(trip.budget) : undefined}
+        destinationName={trip.destination_name || undefined}
+        dateRange={formatDateRange(trip.start_date, trip.end_date)}
         onUpdate={() => refetch()}
       />
-
-
     </View>
   )
 }

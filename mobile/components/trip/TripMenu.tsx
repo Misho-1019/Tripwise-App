@@ -25,10 +25,12 @@ interface TripMenuProps {
   tripId: string
   tripName: string
   tripBudget?: number
+  destinationName?: string
+  dateRange?: string
   onUpdate: () => void
 }
 
-export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, onUpdate }: TripMenuProps) {
+export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, destinationName, dateRange, onUpdate }: TripMenuProps) {
   const [showEdit, setShowEdit] = useState(false)
   const [editName, setEditName] = useState(tripName)
   const [editBudget, setEditBudget] = useState(tripBudget?.toString() || "")
@@ -39,10 +41,15 @@ export function TripMenu({ visible, onClose, tripId, tripName, tripBudget, onUpd
   const handleShare = async () => {
     onClose()
     try {
-      await Share.share({
-        message: `✈ Check out my trip to "${tripName}" on TripWise!`,
-      })
-    } catch {}
+      const lines = [`✈️ Trip to ${destinationName || tripName}`]
+      if (dateRange) lines.push(`📅 ${dateRange}`)
+      if (tripBudget) lines.push(`💰 Budget: $${tripBudget}`)
+      lines.push("")
+      lines.push("Plan your own trips with TripWise!")
+      await Share.share({ message: lines.join("\n") })
+    } catch {
+      Alert.alert("Share", "Unable to open share sheet on this device.")
+    }
   }
 
   const handleDelete = () => {
