@@ -137,7 +137,7 @@ export default function AiPlannerScreen() {
       {/* Background */}
       <Image
         source={{
-          uri: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800",
+          uri: "https://lh3.googleusercontent.com/aida/AP1WRLvPnlG66QHnCrU6HMux4Ca-9069DpEwdAygfjF-gPCMR28d0LuNJ2uXxXgcpqeX3QYUBLTxW2ynsIDkClZeRD0rLhuc2lAlW8kBgyvzDEOpSHSQ55dMyzuYpmzJIDeo70zf3vgngHMJb2FdFDCvSV3xC7wXkOxpwDuW_uKpcK2VTnPDUhCG8elrnij0Bzr9QLstfN1AM6UpnhgwNwkNa7Oz16OWeBD_8HAcmMftprD8s78UivP3h3_d-XE",
         }}
         style={styles.bgImage}
         resizeMode="cover"
@@ -163,40 +163,26 @@ export default function AiPlannerScreen() {
         showsVerticalScrollIndicator={false}
       >
         {messages.map((msg) => (
-          <View key={msg.id} style={styles.messageWrapper}>
-            {msg.role === "ai" && (
-              <View style={styles.avatarCol}>
-                <View style={styles.avatar}>
-                  <Text style={styles.avatarIcon}>🤖</Text>
-                </View>
+          <View key={msg.id} style={msg.role === "user" ? styles.messageWrapperUser : styles.messageWrapper}>
+            <ChatBubble
+              role={msg.role}
+              text={msg.text}
+              timestamp={formatTimestamp(msg.timestamp)}
+            />
+            {msg.itinerary && msg.destinationName && (
+              <View style={styles.cardWrapper}>
+                <ItineraryPreviewCard
+                  plan={msg.itinerary}
+                  destinationName={msg.destinationName}
+                  onViewDetails={() => handleViewDetails(msg.itinerary!, msg.destinationName!)}
+                />
               </View>
             )}
-            <View style={[styles.messageCol, msg.role === "user" && styles.messageColUser]}>
-              <ChatBubble
-                role={msg.role}
-                text={msg.text}
-                timestamp={formatTimestamp(msg.timestamp)}
-              />
-              {msg.itinerary && msg.destinationName && (
-                <View style={styles.cardWrapper}>
-                  <ItineraryPreviewCard
-                    plan={msg.itinerary}
-                    destinationName={msg.destinationName}
-                    onViewDetails={() => handleViewDetails(msg.itinerary!, msg.destinationName!)}
-                  />
-                </View>
-              )}
-            </View>
           </View>
         ))}
         {aiPlan.isPending && (
-          <View style={styles.loadingRow}>
-            <View style={styles.avatar}>
-              <Text style={styles.avatarIcon}>🤖</Text>
-            </View>
-            <View style={styles.loadingBubble}>
-              <ActivityIndicator size="small" color={tokens.primary} />
-            </View>
+          <View style={styles.loadingBubble}>
+            <ActivityIndicator size="small" color={tokens.primary} />
           </View>
         )}
       </ScrollView>
@@ -357,43 +343,16 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   messageWrapper: {
-    flexDirection: "row",
-    gap: 8,
-    alignItems: "flex-start",
+    maxWidth: "85%",
   },
-  avatarCol: {
-    width: 32,
-    paddingTop: 8,
-  },
-  avatar: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "rgba(255,255,255,0.15)",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.25)",
-  },
-  avatarIcon: {
-    fontSize: 16,
-  },
-  messageCol: {
-    flex: 1,
-    gap: 4,
-  },
-  messageColUser: {
-    alignItems: "flex-end",
+  messageWrapperUser: {
+    alignSelf: "flex-end",
   },
   cardWrapper: {
     marginTop: 8,
   },
-  loadingRow: {
-    flexDirection: "row",
-    gap: 8,
-    alignItems: "center",
-  },
   loadingBubble: {
+    alignSelf: "flex-start",
     backgroundColor: "rgba(255,255,255,0.9)",
     padding: 16,
     borderRadius: 16,
