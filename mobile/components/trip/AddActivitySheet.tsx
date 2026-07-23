@@ -118,7 +118,7 @@ export function AddActivitySheet({ visible, onClose, destinationId, tripId, dayI
             data: {
               title: attr?.name || "",
               attraction_id: selectedAttractionId,
-              cost: attr?.price ?? undefined,
+              cost: attr?.price != null ? Number(attr.price) : undefined,
               order_index: nextOrderIndex,
             },
           },
