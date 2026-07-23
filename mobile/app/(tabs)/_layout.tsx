@@ -47,6 +47,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 22, color }}>👤</Text>,
         }}
       />
+      <Tabs.Screen
+        name="ai-planner"
+        options={{
+          title: "AI",
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 22, color }}>🤖</Text>,
+        }}
+      />
     </Tabs>
   )
 }
