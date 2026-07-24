@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react"
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Modal, FlatList } from "react-native"
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Modal, FlatList, Platform, KeyboardAvoidingView } from "react-native"
 import { router } from "expo-router"
 import { useAiChat } from "../hooks/useAiPlanner"
 import { ChatBubble } from "../components/ai/ChatBubble"
@@ -97,7 +97,7 @@ export default function AiPlannerScreen() {
   }, [])
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       {/* Background */}
       <Image
         source={{
@@ -242,7 +242,7 @@ export default function AiPlannerScreen() {
           </View>
         </View>
       </Modal>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
