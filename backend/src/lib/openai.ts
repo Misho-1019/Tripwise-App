@@ -1,6 +1,10 @@
 import OpenAI from "openai"
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  timeout: 25000,
+  maxRetries: 0,
+})
 
 const SYSTEM_PROMPT = `You are TripWise AI, an expert travel assistant for the TripWise mobile app.
 
@@ -139,28 +143,35 @@ RULES:
 - If the conversation goes off-topic, gently steer back to trip planning`
 
 export async function chatWithAI(messages: { role: "user" | "assistant"; content: string }[]) {
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      { role: "system", content: SYSTEM_PROMPT },
-      ...messages.slice(-10),
-    ],
-  })
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...messages.slice(-10),
+      ],
+    })
 
-  const text = completion.choices[0].message.content || ""
+    const text = completion.choices[0].message.content || ""
 
-  const jsonMatch = text.match(/```json\n?([\s\S]*?)```/)
-  if (jsonMatch) {
-    const parsed = JSON.parse(jsonMatch[1])
-    const data = parsed.data || parsed
-    return {
-      type: "itinerary" as const,
-      data: {
-        destination: data.destination || "your trip",
-        days: data.days || [],
-      },
+    const jsonMatch = text.match(/```json\n?([\s\S]*?)```/)
+    if (jsonMatch) {
+      const parsed = JSON.parse(jsonMatch[1])
+      const data = parsed.data || parsed
+      return {
+        type: "itinerary" as const,
+        data: {
+          destination: data.destination || "your trip",
+          days: data.days || [],
+        },
+      }
     }
-  }
 
-  return { type: "text" as const, text }
+    return { type: "text" as const, text }
+  } catch (error: any) {
+    if (error.code === "ETIMEDOUT" || error.status === 429) {
+      throw new Error("The AI service is busy. Please wait a moment and try again.")
+    }
+    throw error
+  }
 }
