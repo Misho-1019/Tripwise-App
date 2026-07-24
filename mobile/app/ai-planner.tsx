@@ -75,6 +75,8 @@ function parseMessage(text: string): { destination: string; days: number; budget
   return { destination, days, budget, interests }
 }
 
+let msgCounter = 0
+
 export default function AiPlannerScreen() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -94,9 +96,10 @@ export default function AiPlannerScreen() {
   }, [messages])
 
   const addMessage = useCallback((role: "ai" | "user", text: string, itinerary?: AiTripPlan, destinationName?: string) => {
+    const id = `msg_${++msgCounter}`
     setMessages((prev) => [
       ...prev,
-      { id: Date.now().toString(), role, text, timestamp: new Date(), itinerary, destinationName },
+      { id, role, text, timestamp: new Date(), itinerary, destinationName },
     ])
   }, [])
 
@@ -109,11 +112,8 @@ export default function AiPlannerScreen() {
 
     const parsed = parseMessage(text)
 
-    addMessage("ai", `Let me plan an amazing trip to ${parsed.destination} for you! Give me a moment...`)
-
     aiPlan.mutate(parsed, {
       onSuccess: (data) => {
-        setMessages((prev) => prev.filter((m) => m.id !== prev[prev.length - 1]?.id))
         addMessage(
           "ai",
           `That sounds amazing! ${parsed.destination} is a wonderful destination. Based on your $${parsed.budget} budget, I've drafted a premium ${parsed.days}-day experience for you:`,
@@ -122,7 +122,6 @@ export default function AiPlannerScreen() {
         )
       },
       onError: () => {
-        setMessages((prev) => prev.filter((m) => m.id !== prev[prev.length - 1]?.id))
         addMessage("ai", "Sorry, I couldn't generate a trip plan. Please try again with different details.")
       },
     })
