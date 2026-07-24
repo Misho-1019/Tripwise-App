@@ -1,8 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react"
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Modal, FlatList } from "react-native"
-import { LinearGradient } from "expo-linear-gradient"
 import { router } from "expo-router"
-import { useAiPlanTrip } from "../hooks/useAiPlanner"
+import { useAiChat } from "../hooks/useAiPlanner"
 import { ChatBubble } from "../components/ai/ChatBubble"
 import { ItineraryPreviewCard } from "../components/ai/ItineraryPreviewCard"
 import { AiTripPlan } from "../types"
@@ -43,38 +42,6 @@ function formatTimestamp(date: Date): string {
   return `${h % 12 || 12}:${m} ${ampm}`
 }
 
-function parseMessage(text: string): { destination: string; days: number; budget: number; interests: string[] } {
-  const lower = text.toLowerCase()
-
-  const daysMatch = lower.match(/(\d+)\s*days?/)
-  const days = daysMatch ? parseInt(daysMatch[1], 10) : 3
-
-  const budgetMatch = lower.match(/\$(\d+(?:,\d{3})*)/)
-  const budget = budgetMatch ? parseInt(budgetMatch[1].replace(/,/g, ""), 10) : 500
-
-  const knownDestinations = [
-    "paris", "tokyo", "bali", "new york", "dubai", "barcelona", "bangkok", "sydney", "rome", "cape town",
-    "london", "berlin", "madrid", "amsterdam", "prague", "vienna", "venice", "florence", "santorini",
-    "maldives", "phuket", "singapore", "hong kong", "seoul", "kyoto", "osaka", "mumbai", "delhi",
-  ]
-  let destination = ""
-  for (const d of knownDestinations) {
-    if (lower.includes(d)) {
-      destination = d.charAt(0).toUpperCase() + d.slice(1)
-      break
-    }
-  }
-  if (!destination) {
-    const words = text.split(/[\s,]+/).filter((w) => w.length > 2 && !/^\d+$/.test(w) && !/^\$/.test(w))
-    destination = words[words.length - 1] || "Unknown"
-  }
-
-  const interestKeywords = ["food", "culture", "nature", "adventure", "beach", "shopping", "history", "nightlife", "museums", "hiking", "relaxation", "romantic"]
-  const interests = interestKeywords.filter((ik) => lower.includes(ik))
-
-  return { destination, days, budget, interests }
-}
-
 let msgCounter = 0
 
 export default function AiPlannerScreen() {
@@ -82,14 +49,14 @@ export default function AiPlannerScreen() {
     {
       id: "welcome",
       role: "ai",
-      text: "Hi! Tell me about your dream trip and I will create the perfect itinerary for you.",
+      text: "Hi! I'm your TripWise assistant. I can help you plan trips or answer questions about the app. What would you like to do?",
       timestamp: new Date(),
     },
   ])
   const [inputText, setInputText] = useState("")
   const [showItinerary, setShowItinerary] = useState<{ plan: AiTripPlan; name: string } | null>(null)
   const scrollRef = useRef<ScrollView>(null)
-  const aiPlan = useAiPlanTrip()
+  const aiChat = useAiChat()
 
   useEffect(() => {
     setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 200)
@@ -105,27 +72,25 @@ export default function AiPlannerScreen() {
 
   const handleSend = useCallback(() => {
     const text = inputText.trim()
-    if (!text || aiPlan.isPending) return
+    if (!text || aiChat.isPending) return
     setInputText("")
 
     addMessage("user", text)
 
-    const parsed = parseMessage(text)
-
-    aiPlan.mutate(parsed, {
+    aiChat.mutate({ message: text }, {
       onSuccess: (data) => {
-        addMessage(
-          "ai",
-          `That sounds amazing! ${parsed.destination} is a wonderful destination. Based on your $${parsed.budget} budget, I've drafted a premium ${parsed.days}-day experience for you:`,
-          data.suggestedTrip,
-          parsed.destination,
-        )
+        if (data.type === "itinerary") {
+          const plan: AiTripPlan = { days: data.data.days }
+          addMessage("ai", `Here's your itinerary for ${data.data.destination}:`, plan, data.data.destination)
+        } else {
+          addMessage("ai", data.text)
+        }
       },
       onError: () => {
-        addMessage("ai", "Sorry, I couldn't generate a trip plan. Please try again with different details.")
+        addMessage("ai", "Sorry, I had trouble processing that. Could you try again?")
       },
     })
-  }, [inputText, aiPlan, addMessage])
+  }, [inputText, aiChat, addMessage])
 
   const handleViewDetails = useCallback((plan: AiTripPlan, name: string) => {
     setShowItinerary({ plan, name })
@@ -179,7 +144,7 @@ export default function AiPlannerScreen() {
             )}
           </View>
         ))}
-        {aiPlan.isPending && (
+        {aiChat.isPending && (
           <View style={styles.loadingBubble}>
             <ActivityIndicator size="small" color={tokens.primary} />
           </View>
@@ -207,7 +172,7 @@ export default function AiPlannerScreen() {
           <TouchableOpacity
             style={[styles.sendButton, !inputText.trim() && styles.sendButtonDisabled]}
             onPress={handleSend}
-            disabled={!inputText.trim() || aiPlan.isPending}
+            disabled={!inputText.trim() || aiChat.isPending}
             activeOpacity={0.7}
           >
             <Text style={styles.sendIcon}>↑</Text>

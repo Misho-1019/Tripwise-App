@@ -2,51 +2,69 @@ import OpenAI from "openai"
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
-export async function generateTripPlan(params: {
-  destination: string
-  days: number
-  budget: number
-  interests?: string[]
-}) {
-  const prompt = `Create a detailed day-by-day travel itinerary for a trip to ${params.destination}.
-Duration: ${params.days} days
-Budget: $${params.budget}
-Interests: ${(params.interests || []).join(", ") || "General sightseeing"}
+const SYSTEM_PROMPT = `You are TripWise AI, a travel assistant for the TripWise mobile app.
 
-Return a valid JSON object with this exact structure:
-{
-  "days": [
-    {
-      "day_number": 1,
-      "title": "Day title",
-      "activities": [
+APP FEATURES:
+- Browse destinations on Home and Explore tabs
+- Save destinations to Wishlist 
+- Create trips from Destination pages or Profile
+- AI Planner tab for AI-generated itineraries
+- Trip Builder to add/manage daily activities with timeline
+- Budget tracking with progress bar
+- Share trips, edit trip details, delete trips
+- Delete activities from a trip day
+
+RESPONSE RULES:
+- If user greets or asks about the app → answer conversationally and helpfully
+- If user asks about how to do something in the app → explain the steps
+- If user provides trip details (destination, days, budget) → 
+  respond with a JSON object wrapped in \`\`\`json markers.
+  The JSON must have this structure:
+  {
+    "type": "itinerary",
+    "data": {
+      "destination": "Paris",
+      "days": [
         {
-          "title": "Activity name",
-          "description": "Brief description",
-          "estimated_cost": 0,
-          "duration": "2 hours",
-          "category": "Sightseeing"
+          "day_number": 1,
+          "title": "Arrival & Exploration",
+          "activities": [
+            {
+              "title": "Eiffel Tower",
+              "description": "Visit the iconic tower",
+              "estimated_cost": 25,
+              "duration": "2 hours",
+              "category": "Sightseeing"
+            }
+          ],
+          "meal_suggestions": {
+            "breakfast": "Cafe de Flore",
+            "lunch": "Le Marais Bistro",
+            "dinner": "Seine River Restaurant"
+          }
         }
-      ],
-      "meal_suggestions": {
-        "breakfast": "Place",
-        "lunch": "Place",
-        "dinner": "Place"
-      }
+      ]
     }
-  ]
-}
+  }
+- Keep responses concise, friendly, and helpful
+- Use emojis occasionally for warmth
+- If the user seems confused, offer to help plan a trip`
 
-Include practical activities, realistic time allocations, and meal suggestions.`
-
+export async function chatWithAI(message: string) {
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
-      { role: "system", content: "You are a travel planning assistant. Return only valid JSON." },
-      { role: "user", content: prompt },
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: message },
     ],
-    response_format: { type: "json_object" },
   })
 
-  return JSON.parse(completion.choices[0].message.content!)
+  const text = completion.choices[0].message.content || ""
+
+  const jsonMatch = text.match(/```json\n?([\s\S]*?)```/)
+  if (jsonMatch) {
+    return { type: "itinerary" as const, data: JSON.parse(jsonMatch[1]) }
+  }
+
+  return { type: "text" as const, text }
 }
