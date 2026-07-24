@@ -77,8 +77,8 @@ export default function AiPlannerScreen() {
 
     addMessage("user", text)
 
-    const history = messages.map((m) => ({
-      role: m.role as "user" | "assistant",
+    const history: { role: "user" | "assistant"; content: string }[] = messages.map((m) => ({
+      role: m.role === "user" ? "user" : "assistant",
       content: m.text,
     }))
 
