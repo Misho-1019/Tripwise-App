@@ -6,14 +6,17 @@ import { chatWithAI } from "../lib/openai"
 const router = Router()
 
 const chatSchema = z.object({
-  message: z.string().min(1).max(2000),
+  messages: z.array(z.object({
+    role: z.enum(["user", "assistant"]),
+    content: z.string().min(1),
+  })).min(1).max(20),
 })
 
 router.post("/chat", authenticate, async (req: AuthRequest, res: Response) => {
   try {
-    const { message } = chatSchema.parse(req.body)
+    const { messages } = chatSchema.parse(req.body)
 
-    const result = await chatWithAI(message)
+    const result = await chatWithAI(messages)
 
     res.json(result)
   } catch (error) {

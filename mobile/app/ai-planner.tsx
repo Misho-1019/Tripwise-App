@@ -77,7 +77,12 @@ export default function AiPlannerScreen() {
 
     addMessage("user", text)
 
-    aiChat.mutate({ message: text }, {
+    const history = messages.map((m) => ({
+      role: m.role as "user" | "assistant",
+      content: m.text,
+    }))
+
+    aiChat.mutate({ messages: [...history, { role: "user", content: text }] }, {
       onSuccess: (data) => {
         if (data.type === "itinerary") {
           const plan: AiTripPlan = { days: data.data.days }
@@ -90,7 +95,7 @@ export default function AiPlannerScreen() {
         addMessage("ai", "Sorry, I had trouble processing that. Could you try again?")
       },
     })
-  }, [inputText, aiChat, addMessage])
+  }, [messages, inputText, aiChat, addMessage])
 
   const handleViewDetails = useCallback((plan: AiTripPlan, name: string) => {
     setShowItinerary({ plan, name })
