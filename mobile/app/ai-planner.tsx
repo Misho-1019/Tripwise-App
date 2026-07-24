@@ -77,9 +77,10 @@ export default function AiPlannerScreen() {
 
     addMessage("user", text)
 
-    const history: { role: "user" | "assistant"; content: string }[] = messages.map((m) => ({
+    const recentMessages = messages.slice(-5)
+    const history: { role: "user" | "assistant"; content: string }[] = recentMessages.map((m) => ({
       role: m.role === "user" ? "user" : "assistant",
-      content: m.text,
+      content: m.text.length > 1000 ? m.text.slice(0, 1000) : m.text,
     }))
 
     aiChat.mutate({ messages: [...history, { role: "user", content: text }] }, {
