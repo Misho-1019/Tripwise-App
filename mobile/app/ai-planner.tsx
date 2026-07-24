@@ -116,8 +116,9 @@ export default function AiPlannerScreen() {
           addMessage("ai", data.text)
         }
       },
-      onError: () => {
-        addMessage("ai", "Sorry, I had trouble processing that. Could you try again?")
+      onError: (err: any) => {
+        const msg = err?.response?.data?.error || "Sorry, I had trouble processing that. Could you try again?"
+        addMessage("ai", msg)
       },
     })
   }, [messages, inputText, aiChat, addMessage])
