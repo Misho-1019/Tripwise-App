@@ -9,7 +9,7 @@ const planTripSchema = z.object({
   destination: z.string().min(1),
   days: z.number().int().min(1).max(30),
   budget: z.number().positive(),
-  interests: z.array(z.string()).min(1),
+  interests: z.array(z.string()).optional(),
 })
 
 router.post("/plan-trip", authenticate, async (req: AuthRequest, res: Response) => {

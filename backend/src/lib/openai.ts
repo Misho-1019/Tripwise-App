@@ -6,12 +6,12 @@ export async function generateTripPlan(params: {
   destination: string
   days: number
   budget: number
-  interests: string[]
+  interests?: string[]
 }) {
   const prompt = `Create a detailed day-by-day travel itinerary for a trip to ${params.destination}.
 Duration: ${params.days} days
 Budget: $${params.budget}
-Interests: ${params.interests.join(", ")}
+Interests: ${(params.interests || []).join(", ") || "General sightseeing"}
 
 Return a valid JSON object with this exact structure:
 {
