@@ -1,7 +1,7 @@
 import { Router, Response } from "express"
 import { z } from "zod"
 import { authenticate, AuthRequest } from "../middleware/auth"
-import { generateTripPlan } from "../lib/gemini"
+import { generateTripPlan } from "../lib/openai"
 
 const router = Router()
 

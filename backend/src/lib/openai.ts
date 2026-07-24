@@ -1,6 +1,6 @@
-import { GoogleGenerativeAI } from "@google/generative-ai"
+import OpenAI from "openai"
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export async function generateTripPlan(params: {
   destination: string
@@ -8,8 +8,6 @@ export async function generateTripPlan(params: {
   budget: number
   interests: string[]
 }) {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
-
   const prompt = `Create a detailed day-by-day travel itinerary for a trip to ${params.destination}.
 Duration: ${params.days} days
 Budget: $${params.budget}
@@ -41,13 +39,14 @@ Return a valid JSON object with this exact structure:
 
 Include practical activities, realistic time allocations, and meal suggestions.`
 
-  const result = await model.generateContent(prompt)
-  const text = result.response.text()
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: "You are a travel planning assistant. Return only valid JSON." },
+      { role: "user", content: prompt },
+    ],
+    response_format: { type: "json_object" },
+  })
 
-  const jsonMatch = text.match(/\{[\s\S]*\}/)
-  if (!jsonMatch) {
-    throw new Error("Failed to parse AI response")
-  }
-
-  return JSON.parse(jsonMatch[0])
+  return JSON.parse(completion.choices[0].message.content!)
 }
