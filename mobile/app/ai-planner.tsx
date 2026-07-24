@@ -30,6 +30,7 @@ interface Message {
   timestamp: Date
   itinerary?: AiTripPlan
   destinationName?: string
+  destinationImage?: string
 }
 
 function formatTimestamp(date: Date): string {
@@ -43,6 +44,28 @@ function formatTimestamp(date: Date): string {
 }
 
 let msgCounter = 0
+
+const destinationImages: Record<string, string> = {
+  Paris: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
+  Tokyo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800",
+  Bali: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800",
+  "New York": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800",
+  Dubai: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800",
+  Barcelona: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800",
+  Bangkok: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800",
+  Sydney: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800",
+  Rome: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
+  "Cape Town": "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8?w=800",
+  London: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
+  Santorini: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800",
+  Maldives: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800",
+  Singapore: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
+  Kyoto: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800",
+}
+
+function destinationImage(name: string): string {
+  return destinationImages[name] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800"
+}
 
 export default function AiPlannerScreen() {
   const [messages, setMessages] = useState<Message[]>([
@@ -62,11 +85,11 @@ export default function AiPlannerScreen() {
     setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 200)
   }, [messages])
 
-  const addMessage = useCallback((role: "ai" | "user", text: string, itinerary?: AiTripPlan, destinationName?: string) => {
+  const addMessage = useCallback((role: "ai" | "user", text: string, itinerary?: AiTripPlan, destinationName?: string, destinationImage?: string) => {
     const id = `msg_${++msgCounter}`
     setMessages((prev) => [
       ...prev,
-      { id, role, text, timestamp: new Date(), itinerary, destinationName },
+      { id, role, text, timestamp: new Date(), itinerary, destinationName, destinationImage },
     ])
   }, [])
 
@@ -87,7 +110,8 @@ export default function AiPlannerScreen() {
       onSuccess: (data) => {
         if (data.type === "itinerary") {
           const plan: AiTripPlan = { days: data.data.days }
-          addMessage("ai", `Here's your itinerary for ${data.data.destination}:`, plan, data.data.destination)
+          const dest = data.data.destination
+          addMessage("ai", `Here's your itinerary for ${dest}:`, plan, dest, destinationImage(dest))
         } else {
           addMessage("ai", data.text)
         }
@@ -144,6 +168,7 @@ export default function AiPlannerScreen() {
                 <ItineraryPreviewCard
                   plan={msg.itinerary}
                   destinationName={msg.destinationName}
+                  imageUrl={msg.destinationImage}
                   onViewDetails={() => handleViewDetails(msg.itinerary!, msg.destinationName!)}
                 />
               </View>

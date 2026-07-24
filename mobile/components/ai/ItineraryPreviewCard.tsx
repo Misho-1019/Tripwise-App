@@ -14,10 +14,11 @@ const tokens = {
 interface ItineraryPreviewCardProps {
   plan: AiTripPlan
   destinationName: string
+  imageUrl?: string
   onViewDetails: () => void
 }
 
-export function ItineraryPreviewCard({ plan, destinationName, onViewDetails }: ItineraryPreviewCardProps) {
+export function ItineraryPreviewCard({ plan, destinationName, imageUrl, onViewDetails }: ItineraryPreviewCardProps) {
   const dayCount = plan.days.length
   const totalCost = plan.days.reduce((sum, d) => sum + d.activities.reduce((s, a) => s + (a.estimated_cost || 0), 0), 0)
 
@@ -26,7 +27,7 @@ export function ItineraryPreviewCard({ plan, destinationName, onViewDetails }: I
       <View style={styles.imageWrapper}>
         <Image
           source={{
-            uri: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800",
+            uri: imageUrl || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800",
           }}
           style={styles.image}
           resizeMode="cover"
