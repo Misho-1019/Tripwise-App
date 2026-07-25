@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from "react"
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Modal, FlatList, Platform, KeyboardAvoidingView } from "react-native"
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Modal, FlatList, Platform, KeyboardAvoidingView } from "react-native"
+import { Image as ExpoImage } from "expo-image"
 import { router } from "expo-router"
 import { useAiChat } from "../hooks/useAiPlanner"
 import { ChatBubble } from "../components/ai/ChatBubble"
@@ -130,12 +131,10 @@ export default function AiPlannerScreen() {
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       {/* Background */}
-      <Image
-        source={{
-          uri: "https://lh3.googleusercontent.com/aida/AP1WRLvPnlG66QHnCrU6HMux4Ca-9069DpEwdAygfjF-gPCMR28d0LuNJ2uXxXgcpqeX3QYUBLTxW2ynsIDkClZeRD0rLhuc2lAlW8kBgyvzDEOpSHSQ55dMyzuYpmzJIDeo70zf3vgngHMJb2FdFDCvSV3xC7wXkOxpwDuW_uKpcK2VTnPDUhCG8elrnij0Bzr9QLstfN1AM6UpnhgwNwkNa7Oz16OWeBD_8HAcmMftprD8s78UivP3h3_d-XE",
-        }}
+      <ExpoImage
+        source="https://lh3.googleusercontent.com/aida/AP1WRLvPnlG66QHnCrU6HMux4Ca-9069DpEwdAygfjF-gPCMR28d0LuNJ2uXxXgcpqeX3QYUBLTxW2ynsIDkClZeRD0rLhuc2lAlW8kBgyvzDEOpSHSQ55dMyzuYpmzJIDeo70zf3vgngHMJb2FdFDCvSV3xC7wXkOxpwDuW_uKpcK2VTnPDUhCG8elrnij0Bzr9QLstfN1AM6UpnhgwNwkNa7Oz16OWeBD_8HAcmMftprD8s78UivP3h3_d-XE"
         style={styles.bgImage}
-        resizeMode="cover"
+        contentFit="cover"
       />
       <View style={styles.bgOverlay} />
 
