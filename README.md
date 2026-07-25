@@ -76,37 +76,26 @@ The system was built to simulate **real-world mobile product requirements** — 
 
 ## 🖼️ Screenshots
 
-<!-- Replace the paths below with your actual screenshot files -->
-
 ### 1️⃣ Onboarding
 ![Onboarding](screenshots/onboarding.png)
 
-### 2️⃣ Authentication
-![Login](screenshots/login.png)
-![Sign Up](screenshots/signup.png)
+### 2️⃣ Home
+![Home](screenshots/home.png)
 
-### 3️⃣ Home & Explore
-![Home Screen](screenshots/home.png)
+### 3️⃣ Explore
 ![Explore](screenshots/explore.png)
 
 ### 4️⃣ Destination Detail
 ![Destination Detail](screenshots/destination-detail.png)
 
-### 5️⃣ Trip Creation
-![Create Trip](screenshots/create-trip.png)
+### 5️⃣ Trip Builder
 ![Trip Builder](screenshots/trip-builder.png)
+
+### 6️⃣ Add Activity
 ![Add Activity](screenshots/add-activity.png)
 
-### 6️⃣ AI Trip Planner
-![AI Planner - Chat](screenshots/ai-planner-chat.png)
-![AI Planner - Itinerary](screenshots/ai-planner-itinerary.png)
-
-### 7️⃣ Wishlist & Profile
-![Wishlist](screenshots/wishlist.png)
-![Profile](screenshots/profile.png)
-
-### 8️⃣ Trips Management
-![Trips List](screenshots/trips-list.png)
+### 7️⃣ AI Planner
+![AI Planner](screenshots/ai-planner.png)
 
 ---
 
