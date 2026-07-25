@@ -76,26 +76,23 @@ The system was built to simulate **real-world mobile product requirements** — 
 
 ## 🖼️ Screenshots
 
-### 1️⃣ Onboarding
-![Onboarding](screenshots/onboarding.png)
+### 1️⃣ Screenshots
 
-### 2️⃣ Home
-![Home](screenshots/home.png)
+<p float="left">
+  <img src="screenshots/onboarding.png" width="200" />
+  <img src="screenshots/home.png" width="200" />
+  <img src="screenshots/explore.png" width="200" />
+</p>
 
-### 3️⃣ Explore
-![Explore](screenshots/explore.png)
+<p float="left">
+  <img src="screenshots/destination-detail.png" width="200" />
+  <img src="screenshots/trip-builder.png" width="200" />
+</p>
 
-### 4️⃣ Destination Detail
-![Destination Detail](screenshots/destination-detail.png)
-
-### 5️⃣ Trip Builder
-![Trip Builder](screenshots/trip-builder.png)
-
-### 6️⃣ Add Activity
-![Add Activity](screenshots/add-activity.png)
-
-### 7️⃣ AI Planner
-![AI Planner](screenshots/ai-planner.png)
+<p float="left">
+  <img src="screenshots/add-activity.png" width="200" />
+  <img src="screenshots/ai-planner.png" width="200" />
+</p>
 
 ---
 
