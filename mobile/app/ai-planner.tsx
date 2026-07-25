@@ -132,7 +132,7 @@ export default function AiPlannerScreen() {
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       {/* Background */}
       <ExpoImage
-        source="https://lh3.googleusercontent.com/aida/AP1WRLvPnlG66QHnCrU6HMux4Ca-9069DpEwdAygfjF-gPCMR28d0LuNJ2uXxXgcpqeX3QYUBLTxW2ynsIDkClZeRD0rLhuc2lAlW8kBgyvzDEOpSHSQ55dMyzuYpmzJIDeo70zf3vgngHMJb2FdFDCvSV3xC7wXkOxpwDuW_uKpcK2VTnPDUhCG8elrnij0Bzr9QLstfN1AM6UpnhgwNwkNa7Oz16OWeBD_8HAcmMftprD8s78UivP3h3_d-XE"
+        source={require("../assets/ai-bg.png")}
         style={styles.bgImage}
         contentFit="cover"
       />
