@@ -57,6 +57,17 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "build": {
+          "preview": {
+            "android": {
+              "buildType": "apk"
+            }
+          }
+        }
+      }
     }
   }
 }
