@@ -36,7 +36,9 @@
       },
       "permissions": [
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
       ]
     },
     "web": {
@@ -66,8 +68,10 @@
               "buildType": "apk"
             }
           }
-        }
-      }
+        },
+        "projectId": "e881096e-5045-45b8-ba7c-a1b82b122fdd"
+      },
+      "router": {}
     }
   }
 }
